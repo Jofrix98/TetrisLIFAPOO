@@ -7,8 +7,8 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public final int TAILLE = 20;
 
-    private CaseSimple pieceCourante = new CaseSimple(this);
-
+    private CaseSimple pieceCourante = new CaseSimple(this,5,5);
+    private PieceFormeI pi = new PieceFormeI();
 
     public GrilleSimple() {
 
@@ -19,7 +19,6 @@ public class GrilleSimple extends Observable implements Runnable {
     public void action() {
         pieceCourante.action();
         //if pieceCourante.
-
     }
 
     public boolean validationPosition(int _nextX, int _nextY) {
@@ -37,6 +36,4 @@ public class GrilleSimple extends Observable implements Runnable {
     public CaseSimple getPieceCourante() {
         return pieceCourante;
     }
-
-
 }

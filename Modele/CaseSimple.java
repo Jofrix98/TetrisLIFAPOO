@@ -2,15 +2,17 @@ package Modele;
 
 public class CaseSimple implements Runnable {
 
-    private int x = 5;
-    private int y = 5;
+    private int x ;
+    private int y;
     private int dY = 1;
 
     private int codeCouleur = 5;
     private GrilleSimple grille;
 
-    public CaseSimple(GrilleSimple _grille) {
+    public CaseSimple(GrilleSimple _grille, int _x, int _y) {
         grille = _grille;
+        x = _x;
+        y =_y;
     }
 
     public void action() {

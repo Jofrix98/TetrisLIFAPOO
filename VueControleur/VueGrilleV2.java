@@ -1,6 +1,7 @@
 package VueControleur;
 
 import Modele.GrilleSimple;
+import Modele.PieceFormeI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,8 @@ class VueGrilleV2 extends JPanel implements Observer {
 
     private final static int TAILLE = 16;
     private GrilleSimple modele;
+
+    private PieceFormeI bei = new PieceFormeI();
     Canvas c;
 
     public VueGrilleV2(GrilleSimple _modele) {
@@ -44,7 +47,11 @@ class VueGrilleV2 extends JPanel implements Observer {
                 }
 
                 g.setColor(Color.BLUE);
-                g.fillRect(modele.getPieceCourante().getx() * TAILLE, modele.getPieceCourante().gety() * TAILLE, TAILLE, TAILLE);
+                for(int i=0;i<5;i++)
+                {
+
+                    g.fillRect(bei.getPieceCourante(i).getx() * TAILLE, bei.getPieceCourante(i).gety() * TAILLE, TAILLE, TAILLE);
+                }
 
             }
         };
