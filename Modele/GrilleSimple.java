@@ -11,8 +11,8 @@ public class GrilleSimple extends Observable implements Runnable {
 
     private CaseSimple pieceCourante = new CaseSimple(this,5,5);
 
-    public Piece bei = new PieceFormeZ(this);
-
+    public Piece bei = new PieceFormeC(this);
+    //Commentaire test
     public GrilleSimple() {
 
         new OrdonnanceurSimple(this).start(); // pour changer le temps de pause, garder la référence de l'ordonnanceur
