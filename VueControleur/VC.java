@@ -28,8 +28,8 @@ public class VC extends JFrame implements Observer {
         jp.add(jt, BorderLayout.NORTH);
         jp.add(jb, BorderLayout.SOUTH);
 
-        //vueGrille = new VueGrilleV1(modele); // composants swing, saccades
-        vueGrille = new VueGrilleV2(modele); // composant AWT dédié
+        vueGrille = new VueGrilleV1(modele); // composants swing, saccades
+        //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
 
         jp.add((JPanel)vueGrille, BorderLayout.CENTER);
         setContentPane(jp);

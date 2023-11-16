@@ -7,8 +7,11 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public final int TAILLE = 20;
 
+    private CaseSimple[][] tabcase;
+
     private CaseSimple pieceCourante = new CaseSimple(this,5,5);
-    private PieceFormeI pi = new PieceFormeI();
+
+    public Piece bei = new PieceFormeZ(this);
 
     public GrilleSimple() {
 
@@ -18,6 +21,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void action() {
         pieceCourante.action();
+        bei.action();
         //if pieceCourante.
     }
 
@@ -28,6 +32,7 @@ public class GrilleSimple extends Observable implements Runnable {
     public void run() {
 
         pieceCourante.run();
+        bei.run();
         setChanged(); // setChanged() + notifyObservers() : notification de la vue pour le rafraichissement
         notifyObservers();
 
@@ -35,5 +40,9 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public CaseSimple getPieceCourante() {
         return pieceCourante;
+    }
+
+    public Piece getPiece(){
+        return bei;
     }
 }

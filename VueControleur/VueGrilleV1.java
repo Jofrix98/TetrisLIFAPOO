@@ -1,6 +1,7 @@
 package VueControleur;
 
 import Modele.GrilleSimple;
+import Modele.PieceFormeI;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,6 +14,7 @@ import java.util.Observer;
 public class VueGrilleV1 extends JPanel implements Observer {
     JPanel[][] tab;
     GrilleSimple modele;
+
 
     public VueGrilleV1(GrilleSimple _modele) {
         modele = _modele;
@@ -37,12 +39,17 @@ public class VueGrilleV1 extends JPanel implements Observer {
         for(int i = 0; i<modele.TAILLE;i++){
             for (int j = 0; j < modele.TAILLE; j++) {
 
-                tab[i][j].setBackground(Color.white);
+                tab[i][j].setBackground(Color.black);
 
             }
         }
-        tab[modele.getPieceCourante().getx()][modele.getPieceCourante().gety()].setBackground(Color.BLUE);
 
+        for (int i = 0; i < 5;i++){
+            for(int j=0;j<5;j++){
+                if(modele.bei.getTabBooli(i,j) == true && modele.validationPosition(i+modele.bei.getX(),j+ modele.bei.getY()) ){
+                    tab[i+modele.bei.getX()][j+ modele.bei.getY()].setBackground(Color.ORANGE);
+                }
+            }
+        }
     }
-
 }
