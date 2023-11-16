@@ -25,7 +25,7 @@ public abstract class Piece {
 
         for(int i=0;i<5;i++){
             for(int j=0;j<5;j++){
-                if(tabBool[i][j] == true && (j+y+1 == grille.TAILLE )){
+                if(tabBool[i][j] == true && (j+y+1 == grille.TAILLE  )){
                     stop = true;
                 }
             }

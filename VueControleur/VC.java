@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 public class VC extends JFrame implements Observer {
 
     JTextField jt = new JTextField("");
-    JButton jb = new JButton("do");
+    JButton jb = new JButton("Vazy essaye");
     GrilleSimple modele;
 
     Observer vueGrille;
