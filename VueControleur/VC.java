@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 public class VC extends JFrame implements Observer {
 
     JTextField jt = new JTextField("");
-    JButton jb = new JButton("Gravité Inversée");
+    JButton jb = new JButton("Rotation");
     GrilleSimple modele;
 
     Observer vueGrille;
@@ -38,10 +38,11 @@ public class VC extends JFrame implements Observer {
         jb.addActionListener(new ActionListener() { //évènement bouton : object contrôleur qui réceptionne
             @Override
             public void actionPerformed(ActionEvent e) {
+                modele.bei.rotation();
                 ex.execute(new Runnable() {
                     @Override
                     public void run() {
-                        modele.action();
+
                     }
                 });
             }

@@ -9,11 +9,6 @@ public abstract class Piece {
 
     public Piece(GrilleSimple _grille){
         grille = _grille;
-        initialiser();
-    }
-
-    public void initialiser(){
-        tabBool = new boolean[5][5];
     }
 
     public void run() {
@@ -23,8 +18,8 @@ public abstract class Piece {
 
         nextY += dY;
 
-        for(int i=0;i<5;i++){
-            for(int j=0;j<5;j++){
+        for(int i=0;i<4;i++){
+            for(int j=0;j<4;j++){
                 if(tabBool[i][j] == true && (j+y+1 == grille.TAILLE  )){
                     stop = true;
                 }
@@ -54,6 +49,8 @@ public abstract class Piece {
     public boolean getTabBooli(int i,int j){
         return tabBool[i][j];
     }
+
+    public abstract void rotation();
 }
 
 

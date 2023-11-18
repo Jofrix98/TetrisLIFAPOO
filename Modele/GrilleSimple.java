@@ -11,7 +11,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     private CaseSimple pieceCourante = new CaseSimple(this,5,5);
 
-    public Piece bei = new PieceFormeT(this);
+    public Piece bei = new PieceFormeC(this);
     //Commentaire test
     public GrilleSimple() {
 

@@ -1,8 +1,8 @@
 package Modele;
 
-public class PieceFormeT extends Piece{
+public class PieceFormeS extends Piece{
 
-    public PieceFormeT(GrilleSimple _grille) {
+    public PieceFormeS(GrilleSimple _grille){
         super(_grille);
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
@@ -14,9 +14,8 @@ public class PieceFormeT extends Piece{
         tabBool[1][0] = true;
         tabBool[0][1] = true;
         tabBool[1][1] = true;
-        tabBool[2][1] = true;
+        tabBool[2][0] = true;
     }
 
     public void rotation(){}
-
 }

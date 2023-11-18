@@ -11,9 +11,11 @@ public class PieceFormeL extends Piece{
         }
         x = 5;
         y = 5;
-        tabBool[0][0] = true;
-        tabBool[0][1] = true;
-        tabBool[0][2] = true;
-        tabBool[1][2] = true;
+        tabBool[1][1] = true;
+        tabBool[2][1] = true;
+        tabBool[3][1] = true;
+        tabBool[3][0] = true;
     }
+
+    public void rotation(){}
 }

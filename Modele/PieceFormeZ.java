@@ -17,5 +17,6 @@ public class PieceFormeZ extends Piece{
         tabBool[2][1] = true;
     }
 
+    public void rotation(){}
 
 }
