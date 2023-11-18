@@ -44,10 +44,13 @@ public class VueGrilleV1 extends JPanel implements Observer {
             }
         }
 
-        for (int i = 0; i <4;i++){
-            for(int j=0;j<4;j++){
-                if(modele.bei.getTabBooli(i,j) == true && modele.validationPosition(i+modele.bei.getX(),j+ modele.bei.getY()) ){
+        for (int i = 0; i < modele.bei.getLignes();i++){
+            for(int j=0;j< modele.bei.getColonnes();j++){
+                if(modele.bei.getTabBooli(i,j)){
                     tab[i+modele.bei.getX()][j+ modele.bei.getY()].setBackground(Color.ORANGE);
+                }else{
+                   //tab[i+modele.bei.getX()][ j+modele.bei.getY()].setBackground(Color.white);
+
                 }
 
             }

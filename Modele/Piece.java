@@ -3,7 +3,7 @@ package Modele;
 public abstract class Piece {
     protected int x;
     protected int y;
-    private int dY = 1;
+    protected int dY = 1;
     protected boolean [][] tabBool;
     protected GrilleSimple grille;
 
@@ -11,31 +11,7 @@ public abstract class Piece {
         grille = _grille;
     }
 
-    public void run() {
-        boolean stop = false;
-        int nextY = y;
-        int nextX = x;
-
-        nextY += dY;
-
-        for(int i=0;i<4;i++){
-            for(int j=0;j<4;j++){
-                if(tabBool[i][j] == true && (j+y+1 == grille.TAILLE  )){
-                    stop = true;
-                }
-            }
-        }
-
-        if (!stop) {
-            y = nextY;
-            x = nextX;
-            //System.out.println("pos" + x + " "+ y);
-        } else {
-            dY = 0;
-        }
-
-
-    }
+    public abstract void run();
 
 
     public void action() {
@@ -51,6 +27,14 @@ public abstract class Piece {
     }
 
     public abstract void rotation();
+
+    public int getLignes() {
+        return tabBool.length;
+    }
+
+    public int getColonnes(){
+        return tabBool[0].length;
+    }
 }
 
 

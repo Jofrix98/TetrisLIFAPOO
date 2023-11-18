@@ -18,5 +18,30 @@ public class PieceFormeC extends Piece{
         tabBool[2][2] = true;
     }
 
-    public void rotation(){}
+    public void rotation(){
+    }
+
+    public void run(){
+        boolean stop = false;
+        int nextY = y;
+        int nextX = x;
+
+        nextY += dY;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tabBool[i][j] && (j + y + 1 == grille.TAILLE)) {
+                    stop = true;
+                }
+            }
+        }
+
+        if (!stop) {
+            y = nextY;
+            x = nextX;
+            //System.out.println("pos" + x + " "+ y);
+        } else {
+            dY = 0;
+        }
+    }
 }
