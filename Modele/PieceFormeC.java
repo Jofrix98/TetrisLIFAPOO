@@ -5,8 +5,8 @@ public class PieceFormeC extends Piece{
     public PieceFormeC(GrilleSimple _grille) {
         super(_grille);
         tabBool = new boolean[4][4];
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
+        for(int i=0;i<4;i++){
+            for(int j=0;j<4;j++){
                 tabBool[i][j] = false;
             }
         }
@@ -19,6 +19,7 @@ public class PieceFormeC extends Piece{
     }
 
     public void rotation(){
+        y -= 1;
     }
 
     public void run(){
@@ -28,8 +29,8 @@ public class PieceFormeC extends Piece{
 
         nextY += dY;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 if (tabBool[i][j] && (j + y + 1 == grille.TAILLE)) {
                     stop = true;
                 }
@@ -44,4 +45,6 @@ public class PieceFormeC extends Piece{
             dY = 0;
         }
     }
+
+
 }

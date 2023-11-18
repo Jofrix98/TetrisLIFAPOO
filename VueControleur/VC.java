@@ -14,6 +14,10 @@ public class VC extends JFrame implements Observer {
 
     JTextField jt = new JTextField("");
     JButton jb = new JButton("Rotation");
+
+    JButton jb2 = new JButton("Droite");
+
+    JButton jb3 = new JButton("Gauche");
     GrilleSimple modele;
 
     Observer vueGrille;
@@ -23,10 +27,12 @@ public class VC extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         modele = _modele;
 
-        setSize(350, 400);
+        setSize(450, 400);
         JPanel jp = new JPanel(new BorderLayout());
         jp.add(jt, BorderLayout.NORTH);
         jp.add(jb, BorderLayout.SOUTH);
+        jp.add(jb2, BorderLayout.EAST);
+        jp.add(jb3, BorderLayout.WEST);
 
         vueGrille = new VueGrilleV1(modele); // composants swing, saccades
         //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
@@ -34,6 +40,25 @@ public class VC extends JFrame implements Observer {
         jp.add((JPanel)vueGrille, BorderLayout.CENTER);
         setContentPane(jp);
 
+        jb3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                modele.bei.mvtGauche();
+
+            }
+
+        });
+        jb2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                modele.bei.mvtDroit();
+                ex.execute(new Runnable() {
+                  @Override
+                  public void run() {
+
+                  }
+                });
+            }
+
+        });
 
         jb.addActionListener(new ActionListener() { //évènement bouton : object contrôleur qui réceptionne
             @Override

@@ -54,6 +54,8 @@ public class PieceFormeL extends Piece{
                 }
             }
         }
+
+        y -= 1;
     }
     public void run(){
         boolean stop = false;
@@ -77,6 +79,9 @@ public class PieceFormeL extends Piece{
         } else {
             dY = 0;
         }
+
     }
+
+
 
 }

@@ -55,6 +55,8 @@ public class PieceFormeJ extends Piece{
             }
         }
 
+        y -= 1;
+
     }
 
     public void run() {
@@ -80,6 +82,8 @@ public class PieceFormeJ extends Piece{
             dY = 0;
         }
     }
+
+
 
     }
 

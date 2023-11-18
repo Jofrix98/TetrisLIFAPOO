@@ -35,6 +35,16 @@ public abstract class Piece {
     public int getColonnes(){
         return tabBool[0].length;
     }
+
+    public void mvtDroit(){
+        x += 1;
+        y -= 1;
+    }
+
+    public void mvtGauche(){
+        x -= 1;
+        y -= 1;
+    }
 }
 
 

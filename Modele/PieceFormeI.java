@@ -56,6 +56,8 @@ public class PieceFormeI extends  Piece {
             }
         }
 
+        y -= 1;
+
     }
     public void run(){
         boolean stop = false;
@@ -80,5 +82,7 @@ public class PieceFormeI extends  Piece {
             dY = 0;
         }
     }
+
+
 
 }
