@@ -40,30 +40,29 @@ public class VueGrilleV1 extends JPanel implements Observer {
 
                 tab[i][j].setBackground(Color.black);
 
+                if(modele.matGrille[i][j] != Color.BLACK){
+                    tab[i][j].setBackground(modele.matGrille[i][j]);
+                }
+
             }
         }
     }
-    public void DessinePieceSwing(JPanel[][] tab, int index){
+    public void DessinePieceSwing(JPanel[][] tab){
         //debut
-        for (int i = 0; i < modele.tabPiece.get(index).getLignes();i++){
-            for(int j=0;j< modele.tabPiece.get(index).getColonnes();j++){
-                if(modele.tabPiece.get(index).getTabBooli(i,j)){
-                    tab[i+modele.tabPiece.get(index).getX()][j+ modele.tabPiece.get(index).getY()].setBackground(modele.tabPiece.get(index).couleurPiece);
+        for (int i = 0; i < modele.getPieceCourante().getLignes();i++){
+            for(int j=0;j< modele.getPieceCourante().getColonnes();j++){
+                if(modele.getPieceCourante().getTabBooli(i,j)){
+                    tab[i+modele.getPieceCourante().getX()][j+ modele.getPieceCourante().getY()].setBackground(modele.getPieceCourante().couleurPiece);
                 }
 
             }
         }
         //fin
     }
-    public void dessinePieces(JPanel[][] tab){
-        for(int i = 0; i<modele.tabPiece.size();i++){
-            this.DessinePieceSwing(tab, i);
-        }
-    }
     @Override
     public void update(Observable o, Object arg) {
         this.dessineGrilleSwing(tab);
-        this.dessinePieces(tab);
+        this.DessinePieceSwing(tab);
 
     }
 }

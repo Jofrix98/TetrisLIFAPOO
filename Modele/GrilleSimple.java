@@ -10,23 +10,22 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public final int TAILLE = 20;
 
-    private CaseSimple[][] tabcase;
+    private Piece pieceCourante;
 
-    private CaseSimple pieceCourante = new CaseSimple(this,5,5);
 
-    public Piece bei;
-
-    public ArrayList<Piece> tabPiece;
-
-    public int[][] matGrille;
+    public java.awt.Color[][] matGrille;
 
 
     //Commentaire test
     public GrilleSimple() {
 
         new OrdonnanceurSimple(this).start(); // pour changer le temps de pause, garder la référence de l'ordonnanceur
-        tabPiece = new ArrayList<Piece>();
-        matGrille = new int[this.TAILLE][this.TAILLE];
+        matGrille = new java.awt.Color[this.TAILLE][this.TAILLE];
+        for (int x = 0; x < this.TAILLE; x ++){
+            for(int y = 0; y < this.TAILLE; y ++){
+                matGrille[x][y] = java.awt.Color.BLACK;
+            }
+        }
         nouvellePiece();
     }
 
@@ -36,37 +35,33 @@ public class GrilleSimple extends Observable implements Runnable {
 
         switch (numero) {
             case 1:
-                bei = new PieceFormeC(this);
+                pieceCourante = new PieceFormeC(this);
                 break;
             case 2:
-                bei = new PieceFormeI(this);
+                pieceCourante = new PieceFormeI(this);
                 break;
             case 3:
-                bei = new PieceFormeJ(this);
+                pieceCourante = new PieceFormeJ(this);
                 break;
             case 4:
-                bei = new PieceFormeL(this);
+                pieceCourante = new PieceFormeL(this);
                 break;
             case 5:
-                bei = new PieceFormeS(this);
+                pieceCourante = new PieceFormeS(this);
                 break;
             case 6:
-                bei = new PieceFormeT(this);
+                pieceCourante = new PieceFormeT(this);
                 break;
             case 7:
-                bei = new PieceFormeZ(this);
+                pieceCourante = new PieceFormeZ(this);
                 break;
 
         }
 
-        tabPiece.add(bei);
-        System.out.println(tabPiece.size());
     }
 
     public void action() {
         pieceCourante.action();
-        bei.action();
-        //if pieceCourante.
     }
 
     public boolean validationPosition(int _nextX, int _nextY) {
@@ -75,9 +70,10 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void run() {
         incrementerPiece();
-        for(int i=0;i<tabPiece.size();i++){
-            tabPiece.get(i).run();
-        }
+
+            pieceCourante.run();
+            lignePleine();
+
         //pieceCourante.run();
         setChanged(); // setChanged() + notifyObservers() : notification de la vue pour le rafraichissement
         notifyObservers();
@@ -85,7 +81,7 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
 
-    public CaseSimple getPieceCourante() {
+    public Piece getPieceCourante() {
         return pieceCourante;
     }
     public void incrementerPiece(){
@@ -96,10 +92,45 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public boolean bottomLastPiece(){
-        if(tabPiece.get(tabPiece.size()-1).getDY() == 0){
+        if(pieceCourante.getDY() == 0){
             return true;
         }
 
         return false;
     }
+
+    public boolean lignePleine(int index){
+        int compt = 0;
+            for(int j = 0; j < TAILLE; j++){
+                if(matGrille[index][j] != Color.BLACK){
+                    compt ++;
+                }
+            }
+        if(compt == TAILLE){
+                return true;
+            }
+
+        return false;
+    }
+
+    public void updateGrille(){
+        for(int i=0;i<TAILLE;i++){
+            if(lignePleine(i)){
+
+            }
+        }
+    }
+
+    public void decalerLigneGrille(int index){
+        for(int i=0;i<TAILLE;i++){
+            matGrille[index][i] = Color.BLACK;
+        }
+
+        for(int j=0;j<TAILLE;j++){
+
+        }
+
+    }
+
+
 }

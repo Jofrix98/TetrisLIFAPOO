@@ -6,7 +6,7 @@ public class PieceFormeT extends Piece{
 
     public PieceFormeT(GrilleSimple _grille) {
         super(_grille);
-        couleurPiece = Color.MAGENTA;
+        couleurPiece = java.awt.Color.GREEN;
         tabBool = new boolean[3][3];
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){

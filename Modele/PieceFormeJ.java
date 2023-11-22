@@ -6,7 +6,7 @@ public class PieceFormeJ extends Piece{
 
     public PieceFormeJ(GrilleSimple _grille) {
         super(_grille);
-        couleurPiece = Color.blue;
+        couleurPiece = java.awt.Color.CYAN;
         tabBool = new boolean[3][3];
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){

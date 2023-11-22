@@ -7,7 +7,7 @@ public class PieceFormeL extends Piece{
     public PieceFormeL(GrilleSimple _grille) {
         super(_grille);
         tabBool = new boolean[3][3];
-        couleurPiece = Color.ORANGE;
+        couleurPiece = java.awt.Color.ORANGE;
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
                 tabBool[i][j] = false;

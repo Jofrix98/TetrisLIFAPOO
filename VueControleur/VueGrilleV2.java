@@ -48,13 +48,13 @@ class VueGrilleV2 extends JPanel implements Observer {
 
 
 
-                for (int i = 0; i < modele.bei.getLignes();i++) {
-                    for (int j = 0; j < modele.bei.getColonnes(); j++) {
-                        if (modele.bei.getTabBooli(i, j)) {
+                for (int i = 0; i < modele.getPieceCourante().getLignes();i++) {
+                    for (int j = 0; j < modele.getPieceCourante().getColonnes(); j++) {
+                        if (modele.getPieceCourante().getTabBooli(i, j)) {
                             g.setColor(Color.magenta);
-                            g.fillRect((i+modele.bei.getX()) * TAILLE, ((modele.bei.getColonnes()-j-1)+modele.bei.getY()) * TAILLE, TAILLE, TAILLE);
+                            g.fillRect((i+modele.getPieceCourante().getX()) * TAILLE, ((modele.getPieceCourante().getColonnes()-j-1)+modele.getPieceCourante().getY()) * TAILLE, TAILLE, TAILLE);
                             g.setColor(Color.BLACK);
-                            g.drawRoundRect((i+modele.bei.getX()) * TAILLE, (j+modele.bei.getY()) * TAILLE, TAILLE, TAILLE, 1, 1);
+                            g.drawRoundRect((i+modele.getPieceCourante().getX()) * TAILLE, (j+modele.getPieceCourante().getY()) * TAILLE, TAILLE, TAILLE, 1, 1);
                         }
 
                     }

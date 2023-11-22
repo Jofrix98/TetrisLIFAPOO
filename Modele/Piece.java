@@ -14,11 +14,12 @@ public abstract class Piece {
     protected boolean [][] tabBool;
     protected GrilleSimple grille;
 
+
     public Piece(GrilleSimple _grille){
         grille = _grille;
     }
 
-    public Color couleurPiece;
+    public java.awt.Color couleurPiece;
 
     public void run(){
         boolean stop = false;
@@ -88,11 +89,13 @@ public abstract class Piece {
             return false;
         }
     }
+
+
     public boolean checkCollision(){
         boolean stop = false;
         for(int i=0;i< getLignes();i++){
             for(int j=0;j< getColonnes();j++){
-                if (tabBool[i][j] && ((j + y + 1 == grille.TAILLE) || (grille.matGrille[i+x][j+1+y] == 1))) {
+                if (tabBool[i][j] && ((j + y + 1 == grille.TAILLE) || (grille.matGrille[i+x][j+1+y] != java.awt.Color.BLACK))) {
                     stop = true;
                 }
             }
@@ -105,7 +108,7 @@ public abstract class Piece {
         for(int i=0;i< getLignes();i++){
             for(int j=0;j< getColonnes();j++){
                 if (tabBool[i][j]) {
-                    grille.matGrille[i+x][j+y] = 1;
+                    grille.matGrille[i+x][j+y] = couleurPiece;
                 }
             }
         }

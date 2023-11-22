@@ -46,14 +46,14 @@ public class VC extends JFrame implements Observer {
         jb3.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                modele.bei.mvtGauche();
+                modele.getPieceCourante().mvtGauche();
 
             }
 
         });
         jb2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                modele.bei.mvtDroit();
+                modele.getPieceCourante().mvtDroit();
                 ex.execute(new Runnable() {
                   @Override
                   public void run() {
@@ -67,7 +67,7 @@ public class VC extends JFrame implements Observer {
         jb.addActionListener(new ActionListener() { //évènement bouton : object contrôleur qui réceptionne
             @Override
             public void actionPerformed(ActionEvent e) {
-                modele.bei.rotation();
+                modele.getPieceCourante().rotation();
                 ex.execute(new Runnable() {
                     @Override
                     public void run() {
@@ -100,7 +100,7 @@ public class VC extends JFrame implements Observer {
             public void run() {
                 vueGrille.update(o, arg);
 
-                jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x = " + modele.getPieceCourante().getx() + " y = " + modele.getPieceCourante().gety());
+                jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x = " + modele.getPieceCourante().getX() + " y = " + modele.getPieceCourante().getY());
                 lastTime = System.currentTimeMillis();
 
             }
