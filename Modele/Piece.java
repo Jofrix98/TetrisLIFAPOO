@@ -18,7 +18,7 @@ public abstract class Piece {
         grille = _grille;
     }
 
-    protected Color couleurPiece;
+    public Color couleurPiece;
 
     public void run(){
         boolean stop = false;
@@ -88,24 +88,6 @@ public abstract class Piece {
             return false;
         }
     }
-
-    public void DessinePieceSwing(JPanel[][] tab){
-        //debut
-        for (int i = 0; i < this.getLignes();i++){
-            for(int j=0;j< this.getColonnes();j++){
-                if(this.getTabBooli(i,j)){
-                    tab[i+this.getX()][j+ this.getY()].setBackground(couleurPiece);
-                }else{
-                    //tab[i+grille.bei.getX()][j+grille.bei.getY()].setBackground(Color.white);
-
-
-                }
-
-            }
-        }
-        //fin
-    }
-
     public boolean checkCollision(){
         boolean stop = false;
         for(int i=0;i< getLignes();i++){

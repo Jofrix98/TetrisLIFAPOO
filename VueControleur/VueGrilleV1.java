@@ -34,10 +34,36 @@ public class VueGrilleV1 extends JPanel implements Observer {
 
     }
 
+    public void dessineGrilleSwing(JPanel[][] tab){
+        for(int i = 0; i< modele.TAILLE;i++){
+            for (int j = 0; j < modele.TAILLE; j++) {
+
+                tab[i][j].setBackground(Color.black);
+
+            }
+        }
+    }
+    public void DessinePieceSwing(JPanel[][] tab, int index){
+        //debut
+        for (int i = 0; i < modele.tabPiece.get(index).getLignes();i++){
+            for(int j=0;j< modele.tabPiece.get(index).getColonnes();j++){
+                if(modele.tabPiece.get(index).getTabBooli(i,j)){
+                    tab[i+modele.tabPiece.get(index).getX()][j+ modele.tabPiece.get(index).getY()].setBackground(modele.tabPiece.get(index).couleurPiece);
+                }
+
+            }
+        }
+        //fin
+    }
+    public void dessinePieces(JPanel[][] tab){
+        for(int i = 0; i<modele.tabPiece.size();i++){
+            this.DessinePieceSwing(tab, i);
+        }
+    }
     @Override
     public void update(Observable o, Object arg) {
-        modele.dessineGrilleSwing(tab);
-        modele.dessinePieces(tab);
+        this.dessineGrilleSwing(tab);
+        this.dessinePieces(tab);
 
     }
 }

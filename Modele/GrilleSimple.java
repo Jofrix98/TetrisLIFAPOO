@@ -16,7 +16,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public Piece bei;
 
-    private ArrayList<Piece> tabPiece;
+    public ArrayList<Piece> tabPiece;
 
     public int[][] matGrille;
 
@@ -88,18 +88,6 @@ public class GrilleSimple extends Observable implements Runnable {
     public CaseSimple getPieceCourante() {
         return pieceCourante;
     }
-
-    public void dessineGrilleSwing(JPanel[][] tab){
-        for(int i = 0; i<this.TAILLE;i++){
-            for (int j = 0; j < this.TAILLE; j++) {
-
-                tab[i][j].setBackground(Color.black);
-
-            }
-        }
-    }
-
-
     public void incrementerPiece(){
         if(bottomLastPiece()){
             nouvellePiece();
@@ -113,11 +101,5 @@ public class GrilleSimple extends Observable implements Runnable {
         }
 
         return false;
-    }
-
-    public void dessinePieces(JPanel[][] tab){
-        for(int i = 0; i<tabPiece.size();i++){
-            tabPiece.get(i).DessinePieceSwing(tab);
-        }
     }
 }
