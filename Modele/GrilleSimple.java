@@ -31,7 +31,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void nouvellePiece(){
         int etendue = 7;
-        int numero = (int) (Math.random() * (double)etendue) + 1;
+        int numero = 2;/*(int) (Math.random() * (double)etendue) + 1;*/
 
         switch (numero) {
             case 1:
@@ -69,12 +69,8 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public void run() {
-        incrementerPiece();
-
-            pieceCourante.run();
-            lignePleine();
-
-        //pieceCourante.run();
+        pieceCourante.run();
+        updateGrille();
         setChanged(); // setChanged() + notifyObservers() : notification de la vue pour le rafraichissement
         notifyObservers();
 
@@ -106,30 +102,35 @@ public class GrilleSimple extends Observable implements Runnable {
                     compt ++;
                 }
             }
-        if(compt == TAILLE){
+        if(compt == TAILLE-1){
+                System.out.println("Oui c'est plein");
                 return true;
             }
 
         return false;
     }
 
-    public void updateGrille(){
-        for(int i=0;i<TAILLE;i++){
-            if(lignePleine(i)){
-
-            }
-        }
-    }
-
     public void decalerLigneGrille(int index){
+
+
         for(int i=0;i<TAILLE;i++){
             matGrille[index][i] = Color.BLACK;
         }
 
-        for(int j=0;j<TAILLE;j++){
-
+        for(int j=index;j>1;j--){
+            for(int z = 0; z<TAILLE;z++){
+                matGrille[j][z] = matGrille[j-1][z];
+            }
         }
 
+    }
+
+    public void updateGrille(){
+        for(int i=0;i<TAILLE;i++){
+            if(lignePleine(i)){
+                decalerLigneGrille(i);
+            }
+        }
     }
 
 
