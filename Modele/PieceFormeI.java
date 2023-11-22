@@ -1,9 +1,12 @@
 package Modele;
 
+import java.awt.*;
+
 public class PieceFormeI extends  Piece {
 
     public PieceFormeI(GrilleSimple _grille) {
         super(_grille);
+        couleurPiece = Color.CYAN;
         tabBool = new boolean[4][4];
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
@@ -11,7 +14,7 @@ public class PieceFormeI extends  Piece {
             }
         }
         x = 5;
-        y = 5;
+        y = 0;
         tabBool[0][1] = true;
         tabBool[1][1] = true;
         tabBool[2][1] = true;
@@ -59,30 +62,5 @@ public class PieceFormeI extends  Piece {
         y -= 1;
 
     }
-    public void run(){
-        boolean stop = false;
-        int nextY = y;
-        int nextX = x;
-
-        nextY += dY;
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (tabBool[i][j] && (j + y + 1 == grille.TAILLE)) {
-                    stop = true;
-                }
-            }
-        }
-
-        if (!stop) {
-            y = nextY;
-            x = nextX;
-            //System.out.println("pos" + x + " "+ y);
-        } else {
-            dY = 0;
-        }
-    }
-
-
 
 }

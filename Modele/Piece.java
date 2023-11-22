@@ -1,8 +1,15 @@
 package Modele;
 
+import javax.swing.*;
+import java.awt.*;
+
 public abstract class Piece {
+
+    protected int id;
     protected int x;
+
     protected int y;
+
     protected int dY = 1;
     protected boolean [][] tabBool;
     protected GrilleSimple grille;
@@ -11,7 +18,30 @@ public abstract class Piece {
         grille = _grille;
     }
 
-    public abstract void run();
+    protected Color couleurPiece;
+
+    public void run(){
+        boolean stop = false;
+        int nextY = y;
+        int nextX = x;
+
+        nextY += dY;
+
+        stop = checkCollision();
+
+        if (!stop) {
+            y = nextY;
+            x = nextX;
+            //System.out.println("pos" + x + " "+ y);
+        } else {
+            dY = 0;
+        }
+
+        if(dY == 0){
+            fusionAvecMatGrille();
+        }
+
+    }
 
 
     public void action() {
@@ -27,6 +57,10 @@ public abstract class Piece {
     }
 
     public abstract void rotation();
+
+    public int getDY(){
+        return dY;
+    }
 
     public int getLignes() {
         return tabBool.length;
@@ -45,6 +79,57 @@ public abstract class Piece {
         x -= 1;
         y -= 1;
     }
+
+    public boolean pieceAuFond(){
+        if(y+1 == grille.TAILLE){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void DessinePieceSwing(JPanel[][] tab){
+        //debut
+        for (int i = 0; i < this.getLignes();i++){
+            for(int j=0;j< this.getColonnes();j++){
+                if(this.getTabBooli(i,j)){
+                    tab[i+this.getX()][j+ this.getY()].setBackground(couleurPiece);
+                }else{
+                    //tab[i+grille.bei.getX()][j+grille.bei.getY()].setBackground(Color.white);
+
+
+                }
+
+            }
+        }
+        //fin
+    }
+
+    public boolean checkCollision(){
+        boolean stop = false;
+        for(int i=0;i< getLignes();i++){
+            for(int j=0;j< getColonnes();j++){
+                if (tabBool[i][j] && ((j + y + 1 == grille.TAILLE) || (grille.matGrille[i+x][j+1+y] == 1))) {
+                    stop = true;
+                }
+            }
+        }
+
+        return stop;
+    }
+
+    public void fusionAvecMatGrille(){
+        for(int i=0;i< getLignes();i++){
+            for(int j=0;j< getColonnes();j++){
+                if (tabBool[i][j]) {
+                    grille.matGrille[i+x][j+y] = 1;
+                }
+            }
+        }
+    }
+
+
 }
 
 

@@ -13,14 +13,17 @@ import java.util.concurrent.Executors;
 public class VC extends JFrame implements Observer {
 
     JTextField jt = new JTextField("");
+
     JButton jb = new JButton("Rotation");
 
     JButton jb2 = new JButton("Droite");
 
     JButton jb3 = new JButton("Gauche");
+
     GrilleSimple modele;
 
     Observer vueGrille;
+
     private Executor ex =  Executors.newSingleThreadExecutor();
 
     public VC(GrilleSimple _modele) {
@@ -41,6 +44,7 @@ public class VC extends JFrame implements Observer {
         setContentPane(jp);
 
         jb3.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 modele.bei.mvtGauche();
 
@@ -119,11 +123,4 @@ public class VC extends JFrame implements Observer {
             }
         );
     }
-
-
-
-
-
-
-
 }

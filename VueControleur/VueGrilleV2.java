@@ -37,7 +37,7 @@ class VueGrilleV2 extends JPanel implements Observer {
                 for (int i = 0; i < modele.TAILLE; i++) {
                     for (int j = 0; j < modele.TAILLE; j++) {
                         //if (!(i == modele.getPieceCourante().getx() && j == modele.getPieceCourante().gety())) {
-                        g.setColor(Color.WHITE);
+                        g.setColor(Color.BLACK);
                         g.fillRect(i * TAILLE, j * TAILLE, TAILLE, TAILLE);
                         g.setColor(Color.BLACK);
                         g.drawRoundRect(i * TAILLE, j * TAILLE, TAILLE, TAILLE, 1, 1);
@@ -46,9 +46,19 @@ class VueGrilleV2 extends JPanel implements Observer {
 
                 }
 
-                    g.setColor(Color.BLUE);
-                    g.fillRect(modele.getPieceCourante().getx() * TAILLE, modele.getPieceCourante().gety() * TAILLE, TAILLE, TAILLE);
 
+
+                for (int i = 0; i < modele.bei.getLignes();i++) {
+                    for (int j = 0; j < modele.bei.getColonnes(); j++) {
+                        if (modele.bei.getTabBooli(i, j)) {
+                            g.setColor(Color.magenta);
+                            g.fillRect((i+modele.bei.getX()) * TAILLE, ((modele.bei.getColonnes()-j-1)+modele.bei.getY()) * TAILLE, TAILLE, TAILLE);
+                            g.setColor(Color.BLACK);
+                            g.drawRoundRect((i+modele.bei.getX()) * TAILLE, (j+modele.bei.getY()) * TAILLE, TAILLE, TAILLE, 1, 1);
+                        }
+
+                    }
+                }
 
             }
         };
