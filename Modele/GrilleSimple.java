@@ -31,7 +31,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void nouvellePiece(){
         int etendue = 7;
-        int numero = 2;/*(int) (Math.random() * (double)etendue) + 1;*/
+        int numero = (int) (Math.random() * (double)etendue) + 1;
 
         switch (numero) {
             case 1:
@@ -70,7 +70,8 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void run() {
         pieceCourante.run();
-        updateGrille();
+        incrementerPiece();
+       // updateGrille();
         setChanged(); // setChanged() + notifyObservers() : notification de la vue pour le rafraichissement
         notifyObservers();
 

@@ -24,6 +24,8 @@ public class VC extends JFrame implements Observer {
 
     Observer vueGrille;
 
+    KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
     private Executor ex =  Executors.newSingleThreadExecutor();
 
     public VC(GrilleSimple _modele) {
@@ -54,12 +56,6 @@ public class VC extends JFrame implements Observer {
         jb2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 modele.getPieceCourante().mvtDroit();
-                ex.execute(new Runnable() {
-                  @Override
-                  public void run() {
-
-                  }
-                });
             }
 
         });
@@ -68,22 +64,21 @@ public class VC extends JFrame implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 modele.getPieceCourante().rotation();
-                ex.execute(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                });
             }
         });
 
-        addKeyListener(new KeyAdapter() {
+
+        manager.addKeyEventDispatcher(new KeyEventDispatcher() {
             @Override
-            public void keyPressed(KeyEvent e) { //évènement clavier : object contrôleur qui réceptionne
-                super.keyPressed(e);
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_SPACE: modele.action();
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                System.out.println("key event");
+                if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    System.out.println(e.getKeyCode());
                 }
+                // Renvoyer `true` pour dire que l'event est consommé
+                // (=> il ne sera traité par personne d'autre)
+                // ou `false` pour propager l'event au prochain Listener
+                return false;
             }
         });
 
