@@ -1,6 +1,9 @@
 package VueControleur;
 
 import Modele.GrilleSimple;
+import Modele.PieceFormeC;
+import Modele.PieceFormeI;
+import Modele.PieceFormeJ;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,8 +75,18 @@ public class VC extends JFrame implements Observer {
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
                 System.out.println("key event");
-                if (e.getID() == KeyEvent.KEY_PRESSED) {
-                    System.out.println(e.getKeyCode());
+                if(e.getID() == KeyEvent.KEY_PRESSED) {
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_SPACE:
+                            modele.getPieceCourante().rotation();
+                            break;
+                        case KeyEvent.VK_Q:
+                            modele.getPieceCourante().mvtGauche();
+                            break;
+                        case KeyEvent.VK_D:
+                            modele.getPieceCourante().mvtDroit();
+                            break;
+                    }
                 }
                 // Renvoyer `true` pour dire que l'event est consommé
                 // (=> il ne sera traité par personne d'autre)
