@@ -35,41 +35,16 @@ public class VC extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         modele = _modele;
 
-        setSize(450, 400);
+        setSize(370, 400);
         JPanel jp = new JPanel(new BorderLayout());
         jp.add(jt, BorderLayout.NORTH);
-        jp.add(jb, BorderLayout.SOUTH);
-        jp.add(jb2, BorderLayout.EAST);
-        jp.add(jb3, BorderLayout.WEST);
+
 
         vueGrille = new VueGrilleV1(modele); // composants swing, saccades
         //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
 
         jp.add((JPanel)vueGrille, BorderLayout.CENTER);
         setContentPane(jp);
-
-        jb3.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                modele.getPieceCourante().mvtGauche();
-
-            }
-
-        });
-        jb2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                modele.getPieceCourante().mvtDroit();
-            }
-
-        });
-
-        jb.addActionListener(new ActionListener() { //évènement bouton : object contrôleur qui réceptionne
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                modele.getPieceCourante().rotation();
-            }
-        });
-
 
         manager.addKeyEventDispatcher(new KeyEventDispatcher() {
             @Override

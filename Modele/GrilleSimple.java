@@ -21,17 +21,17 @@ public class GrilleSimple extends Observable implements Runnable {
 
         new OrdonnanceurSimple(this).start(); // pour changer le temps de pause, garder la référence de l'ordonnanceur
         matGrille = new java.awt.Color[this.TAILLE][this.TAILLE];
-        for (int x = 0; x < this.TAILLE; x ++){
-            for(int y = 0; y < this.TAILLE; y ++){
+        for (int x = 0; x < this.TAILLE; x++) {
+            for (int y = 0; y < this.TAILLE; y++) {
                 matGrille[x][y] = java.awt.Color.BLACK;
             }
         }
         nouvellePiece();
     }
 
-    public void nouvellePiece(){
+    public void nouvellePiece() {
         int etendue = 7;
-        int numero = (int) (Math.random() * (double)etendue) + 1;
+        int numero = (int) (Math.random() * (double) etendue) + 1;
 
         switch (numero) {
             case 1:
@@ -65,74 +65,60 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public boolean validationPosition(int _nextX, int _nextY) {
-        return (_nextY>=0 && _nextY < TAILLE);
+        return (_nextY >= 0 && _nextY < TAILLE);
     }
 
     public void run() {
         pieceCourante.run();
         incrementerPiece();
-       // updateGrille();
-        setChanged(); // setChanged() + notifyObservers() : notification de la vue pour le rafraichissement
-        notifyObservers();
 
+        for (int y = 0; y < TAILLE; y++) {
+            if (ligneEstPleine(y)) {
+                effacerLigne(y);
+            }
+        }
+
+        setChanged();
+        notifyObservers();
     }
 
 
     public Piece getPieceCourante() {
         return pieceCourante;
     }
-    public void incrementerPiece(){
-        if(bottomLastPiece()){
+
+    public void incrementerPiece() {
+        if (bottomLastPiece()) {
             nouvellePiece();
 
         }
     }
 
-    public boolean bottomLastPiece(){
-        if(pieceCourante.getDY() == 0){
+    public boolean bottomLastPiece() {
+        if (pieceCourante.getDY() == 0) {
             return true;
         }
 
         return false;
     }
 
-    public boolean lignePleine(int index){
-        int compt = 0;
-            for(int j = 0; j < TAILLE; j++){
-                if(matGrille[index][j] != Color.BLACK){
-                    compt ++;
-                }
-            }
-        if(compt == TAILLE-1){
-                System.out.println("Oui c'est plein");
-                return true;
-            }
-
-        return false;
-    }
-
-    public void decalerLigneGrille(int index){
-
-
-        for(int i=0;i<TAILLE;i++){
-            matGrille[index][i] = Color.BLACK;
-        }
-
-        for(int j=index;j>1;j--){
-            for(int z = 0; z<TAILLE;z++){
-                matGrille[j][z] = matGrille[j-1][z];
+    public boolean ligneEstPleine(int ligne) {
+        for (int x = 0; x < TAILLE; x++) {
+            if (matGrille[x][ligne] == java.awt.Color.BLACK) {
+                return false;
             }
         }
-
+        return true;
     }
 
-    public void updateGrille(){
-        for(int i=0;i<TAILLE;i++){
-            if(lignePleine(i)){
-                decalerLigneGrille(i);
+    public void effacerLigne(int ligne) {
+        for (int y = ligne; y > 0; y--) {
+            for (int x = 0; x < TAILLE; x++) {
+                matGrille[x][y] = matGrille[x][y - 1];
             }
         }
+        for (int x = 0; x < TAILLE; x++) {
+            matGrille[x][0] = java.awt.Color.BLACK;
+        }
     }
-
-
 }
