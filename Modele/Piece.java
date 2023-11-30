@@ -44,6 +44,7 @@ public abstract class Piece {
 
     }
 
+
     public void action() {
         dY *= -1;
     }
@@ -57,6 +58,7 @@ public abstract class Piece {
     }
 
     public abstract void rotation();
+
 
     public int getDY(){
         return dY;
@@ -87,6 +89,7 @@ public abstract class Piece {
         }
     }
 
+
     public boolean checkCollision(){
         boolean stop = false;
         for(int i=0;i< getLignes();i++){
@@ -110,8 +113,7 @@ public abstract class Piece {
         }
     }
 
-    public void pause(){
-
-    }
 
 }
+
+

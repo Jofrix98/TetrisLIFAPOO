@@ -19,7 +19,7 @@ public class VueGrilleV1 extends JPanel implements Observer {
     public VueGrilleV1(GrilleSimple _modele) {
         modele = _modele;
         setLayout(new GridLayout(modele.TAILLE, modele.TAILLE));
-        Border blackline = BorderFactory.createLineBorder(Color.black,1);
+        Border blackline = BorderFactory.createLineBorder(Color.gray,1);
         //setBorder(blackline);
         tab = new JPanel[modele.TAILLE][modele.TAILLE];
 
@@ -65,4 +65,8 @@ public class VueGrilleV1 extends JPanel implements Observer {
         this.DessinePieceSwing(tab);
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/main

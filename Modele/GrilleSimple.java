@@ -4,13 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 public class GrilleSimple extends Observable implements Runnable {
 
     public final int TAILLE = 20;
-
+    private FilePieces filePiecesSuivantes;
     private Piece pieceCourante;
+    private PieceSuivante pieceSuivante;
     private OrdonnanceurSimple ordonnanceurSimple;
 
     public java.awt.Color[][] matGrille;
@@ -26,41 +29,22 @@ public class GrilleSimple extends Observable implements Runnable {
                 matGrille[x][y] = java.awt.Color.BLACK;
             }
         }
-        nouvellePiece();
+        filePiecesSuivantes = new FilePieces(this);
+        pieceSuivante = new PieceSuivante();
+
+        pieceCourante = pieceSuivante.nouvellePiece(this);
+    }
+
+    public Piece getPieceSuivante() {
+        return filePiecesSuivantes.getPieceSuivante();
+    }
+
+    public void incrementerFilePiece() {
+        filePiecesSuivantes.incrementerPiece();
     }
 
     public OrdonnanceurSimple getOrdonnanceurSimple(){
         return ordonnanceurSimple;
-    }
-    public void nouvellePiece(){
-        int etendue = 7;
-        int numero = (int) (Math.random() * (double)etendue) + 1;
-
-        switch (numero) {
-            case 1:
-                pieceCourante = new PieceFormeC(this);
-                break;
-            case 2:
-                pieceCourante = new PieceFormeI(this);
-                break;
-            case 3:
-                pieceCourante = new PieceFormeJ(this);
-                break;
-            case 4:
-                pieceCourante = new PieceFormeL(this);
-                break;
-            case 5:
-                pieceCourante = new PieceFormeS(this);
-                break;
-            case 6:
-                pieceCourante = new PieceFormeT(this);
-                break;
-            case 7:
-                pieceCourante = new PieceFormeZ(this);
-                break;
-
-        }
-
     }
 
     public void action() {
@@ -80,7 +64,7 @@ public class GrilleSimple extends Observable implements Runnable {
                 effacerLigne(y);
             }
         }
-        System.out.println(terminerPartie());
+        //System.out.println(terminerPartie());
         setChanged();
         notifyObservers();
     }
@@ -91,8 +75,8 @@ public class GrilleSimple extends Observable implements Runnable {
     }
     public void incrementerPiece(){
         if(bottomLastPiece()){
-            nouvellePiece();
-
+            pieceCourante = getPieceSuivante();
+            incrementerFilePiece();
         }
     }
     public boolean bottomLastPiece(){
