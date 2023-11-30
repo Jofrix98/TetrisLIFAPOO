@@ -84,7 +84,7 @@ public class VC extends JFrame implements Observer {
                 //System.out.println("key event");
                 if(e.getID() == KeyEvent.KEY_PRESSED) {
                     switch (e.getKeyCode()) {
-                        case KeyEvent.VK_SPACE:
+                        case KeyEvent.VK_UP:
                             modele.getPieceCourante().rotation();
                             break;
                         case KeyEvent.VK_LEFT:
@@ -94,13 +94,14 @@ public class VC extends JFrame implements Observer {
                             modele.getPieceCourante().mvtDroit();
                             break;
                         case KeyEvent.VK_DOWN:
-                            modele.getOrdonnanceurSimple().setTempsExecution(100);
+                            modele.getPieceCourante().descenteRapide();
                     }
+
                 }
 
                 else if (e.getID() == KeyEvent.KEY_RELEASED) {
                     if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        modele.getOrdonnanceurSimple().setTempsExecution(500); // Réinitialisation du temps d'exécution
+                        modele.getOrdonnanceurSimple().retourInitiale(); // Réinitialisation du temps d'exécution
                     }
                 }
 

@@ -3,25 +3,38 @@ package Modele;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Piece {
+public abstract class Piece implements Runnable{
 
     protected int id;
     protected int x;
-
     protected int y;
 
+    private boolean mvtDroitt;
+    private OrdonnanceurSimple ordoPiece;
     protected int dY = 1;
     protected boolean [][] tabBool;
     protected GrilleSimple grille;
 
 
     public Piece(GrilleSimple _grille){
-        grille = _grille;
+     ordoPiece = new OrdonnanceurSimple(this);
+     ordoPiece.start();
+     ordoPiece.setTempsExecution(10);
+     grille = _grille;
     }
 
     public java.awt.Color couleurPiece;
 
+
     public void run(){
+        if(mvtDroitt){
+            x += 1;
+            mvtDroitt = false;
+        }
+
+    }
+
+    public void chute(){
         boolean stop = false;
         int nextY = y;
         int nextX = x;
@@ -30,10 +43,11 @@ public abstract class Piece {
 
         stop = checkCollision();
 
+
         if (!stop) {
             y = nextY;
-            x = nextX;
-            //System.out.println("pos" + x + " "+ y);
+            //x = nextX;
+
         } else {
             dY = 0;
         }
@@ -41,9 +55,7 @@ public abstract class Piece {
         if(dY == 0){
             fusionAvecMatGrille();
         }
-
     }
-
 
     public void action() {
         dY *= -1;
@@ -73,11 +85,40 @@ public abstract class Piece {
     }
 
     public void mvtDroit(){
-        x += 1;
+        boolean position_valide = true;
+        for(int i=0;i< getLignes();i++){
+            for(int j=0;j< getColonnes();j++){
+                if (tabBool[i][j] && ((i + x + 1 == grille.TAILLE) || (grille.matGrille[i+x+1][j+y] != java.awt.Color.BLACK))) {
+                    position_valide = false;
+                }
+            }
+        }
+
+        if(position_valide){
+
+            position_valide = true;
+
+        }
+
+        mvtDroitt = position_valide;
+
     }
 
     public void mvtGauche(){
-        x -= 1;
+        boolean position_valide = true;
+        for(int i=0;i< getLignes();i++){
+            for(int j=0;j< getColonnes();j++){
+                if (tabBool[i][j] && ((i + x - 1 < 0) || (grille.matGrille[i+x-1][j+y] != java.awt.Color.BLACK))) {
+                    position_valide = false;
+                }
+            }
+        }
+
+        if(position_valide){
+
+            x-=1;
+
+        }
     }
 
     public boolean pieceAuFond(){
@@ -88,7 +129,6 @@ public abstract class Piece {
             return false;
         }
     }
-
 
     public boolean checkCollision(){
         boolean stop = false;
@@ -113,6 +153,9 @@ public abstract class Piece {
         }
     }
 
+    public void descenteRapide(){
+        grille.getOrdonnanceurSimple().setTempsExecution(100);
+    }
 
 }
 

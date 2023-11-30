@@ -56,7 +56,7 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public void run() {
-        pieceCourante.run();
+        pieceCourante.chute();
         incrementerPiece();
 
         for (int y = 0; y < TAILLE; y++) {
@@ -120,8 +120,5 @@ public class GrilleSimple extends Observable implements Runnable {
         }
         return res;
     }
-
-
-
 
 }
