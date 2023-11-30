@@ -65,8 +65,8 @@ public class VueGrilleV1 extends JPanel implements Observer {
         this.DessinePieceSwing(tab);
 
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> origin/main
+
+
+
