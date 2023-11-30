@@ -44,7 +44,6 @@ public abstract class Piece {
 
     }
 
-
     public void action() {
         dY *= -1;
     }
@@ -73,12 +72,10 @@ public abstract class Piece {
 
     public void mvtDroit(){
         x += 1;
-        y -= 1;
     }
 
     public void mvtGauche(){
         x -= 1;
-        y -= 1;
     }
 
     public boolean pieceAuFond(){
@@ -89,7 +86,6 @@ public abstract class Piece {
             return false;
         }
     }
-
 
     public boolean checkCollision(){
         boolean stop = false;
@@ -114,7 +110,8 @@ public abstract class Piece {
         }
     }
 
+    public void pause(){
+
+    }
 
 }
-
-
