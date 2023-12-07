@@ -103,6 +103,7 @@ public class GrilleSimple {
         if(bottomLastPiece()){
             pieceCourante = getPieceSuivante();
             incrementerFilePiece();
+            points += 100;
 
         }
 
@@ -121,7 +122,7 @@ public class GrilleSimple {
                 return false;
             }
         }
-        points += 100;
+
         return true;
     }
 
@@ -160,4 +161,10 @@ public class GrilleSimple {
         }
     }
 
+    public boolean grillePleine(){
+            if(pieceCourante.estAuSommet()){
+                return true;
+            }
+        return false;
+    }
 }

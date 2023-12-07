@@ -40,4 +40,14 @@ public class Partie extends Observable implements Runnable {
         notifyObservers();
     }
 
+    public boolean partieTerminee(){
+        if(grilleJoueur1.grillePleine() || grilleJoueur2.grillePleine()){
+
+            return true;
+        }
+        return false;
+    }
+
+
+
 }

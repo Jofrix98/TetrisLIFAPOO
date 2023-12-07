@@ -31,8 +31,22 @@ public class VC extends JFrame implements Observer {
         modeleJoueur1 = _modeleJoueur1;
         modeleJoueur2 = _modeleJoueur2;
         partie = new Partie(modeleJoueur1, modeleJoueur2);
-        setSize(800, 450);
-        JPanel jp = new JPanel(new FlowLayout());
+        setSize(700, 450);
+
+        String imagePath = "data/Tetriss.jpeg";
+        ImagePanel imagePanel = new ImagePanel(imagePath);
+        add(imagePanel);
+
+        JPanel jp = new JPanel();
+        jp.setLayout(new OverlayLayout(jp));
+
+
+
+
+        Dimension Dime2 = new Dimension(165, 50);
+        jt.setPreferredSize(Dime2);
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jp.add(jt);
 
 
         vueGrilleJoueur1 = new VueGrilleV1(partie); // composants swing, saccades
@@ -129,7 +143,8 @@ public class VC extends JFrame implements Observer {
                 vueGrilleJoueur2.update(o, arg);
                 vuePieceSuivante.update(o, arg);
 
-                //jt.setText("Points : " + modele.points);
+                jt.setText("J1: " + modeleJoueur1.points + ';' +
+                            "j2: " + modeleJoueur2.points );
 
                 lastTime = System.currentTimeMillis();
             }
@@ -141,19 +156,6 @@ public class VC extends JFrame implements Observer {
 
         final ImageIcon icon = new ImageIcon("data/Tetriss.jpeg");
 
-        JTextArea text = new JTextArea()
-        {
-            Image img = icon.getImage();
-            {setOpaque(false);}
-            public void paintComponent(Graphics graphics)
-            {
-                graphics.drawImage(img, 0, 0, this);
-                super.paintComponent(graphics);
-            }
-        };
-
-
-
 
         SwingUtilities.invokeLater(new Runnable() {
 
@@ -163,13 +165,11 @@ public class VC extends JFrame implements Observer {
                     VC vc = new VC(mJ1, mJ2);
                     Partie partie = new Partie(mJ1, mJ2);
                     vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    JScrollPane pane = new JScrollPane(text);
-                    Container content = vc.getContentPane();
-                    content.add(pane, BorderLayout.CENTER);
                     partie.addObserver(vc);
                     vc.setVisible(true);
 
                 }
+
             }
         );
     }
