@@ -18,13 +18,13 @@ public class VueGrilleV1 extends JPanel implements Observer {
 
     public VueGrilleV1(GrilleSimple _modele) {
         modele = _modele;
-        setLayout(new GridLayout(modele.TAILLE, modele.TAILLE));
+        setLayout(new GridLayout(modele.LONGUEUR, modele.LARGEUR));
         Border blackline = BorderFactory.createLineBorder(Color.gray,1);
         //setBorder(blackline);
-        tab = new JPanel[modele.TAILLE][modele.TAILLE];
+        tab = new JPanel[modele.LARGEUR][modele.LONGUEUR];
 
-        for(int j = 0; j<modele.TAILLE;j++){
-            for (int i = 0; i < modele.TAILLE; i++) {
+        for(int j = 0; j<modele.LONGUEUR;j++){
+            for (int i = 0; i < modele.LARGEUR; i++) {
                 JPanel caseG = new JPanel();
                 tab[i][j] = caseG;
                 caseG.setBorder(blackline);
@@ -35,8 +35,8 @@ public class VueGrilleV1 extends JPanel implements Observer {
     }
 
     public void dessineGrilleSwing(JPanel[][] tab){
-        for(int i = 0; i< modele.TAILLE;i++){
-            for (int j = 0; j < modele.TAILLE; j++) {
+        for(int i = 0; i< modele.LARGEUR;i++){
+            for (int j = 0; j < modele.LONGUEUR; j++) {
 
                 tab[i][j].setBackground(Color.black);
 

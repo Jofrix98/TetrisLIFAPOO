@@ -5,6 +5,7 @@ import Modele.PieceFormeC;
 import Modele.PieceFormeI;
 import Modele.PieceFormeJ;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -36,8 +37,8 @@ public class VC extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         modele = _modele;
 
-        setSize(450, 400);
-        JPanel jp = new JPanel(new BorderLayout());
+        setSize(400, 450);
+        JPanel jp = new JPanel(new FlowLayout());
         //jt.setBounds(0, 0, 50, 50);
         //jb3.setBounds(0, 0, 25, 400);
         //jp.add(jt);
@@ -45,16 +46,25 @@ public class VC extends JFrame implements Observer {
         //jp.add(jb2, BorderLayout.EAST);
         //jp.add(jb3, BorderLayout.WEST);
 
-        vueGrille = new VueGrilleV1(modele); // composants swing, saccades
-        //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
 
-        jp.add((JPanel)vueGrille, BorderLayout.CENTER);
+
+        vueGrille = new VueGrilleV1(modele); // composants swing, saccades
+        JPanel panelVueGrille = (JPanel) vueGrille;
+        //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
+        Dimension newDimension = new Dimension(200, 410);
+        panelVueGrille.setPreferredSize(newDimension);
+        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.add(panelVueGrille);
         setContentPane(jp);
 
         vuePieceSuivante = new VuePieceSuivante(modele);
         JPanel panelVuePieceSuivante = (JPanel) vuePieceSuivante;
+        Dimension Dime = new Dimension(100, 100);
+        panelVuePieceSuivante.setPreferredSize(Dime);
         //panelVuePieceSuivante.setBounds(0, 0, 20, 20);
-        jp.add(panelVuePieceSuivante, BorderLayout.EAST);
+        jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        jp.add((JPanel)panelVuePieceSuivante);
+
 
         jb3.addActionListener(new ActionListener() {
 
@@ -119,6 +129,8 @@ public class VC extends JFrame implements Observer {
 
     }
 
+
+
     static long lastTime = System.currentTimeMillis();
 
     @Override
@@ -139,12 +151,30 @@ public class VC extends JFrame implements Observer {
 
     public static void main(String[] args) {
 
+        final ImageIcon icon = new ImageIcon("data/Tetriss.jpeg");
+        JTextArea text = new JTextArea()
+        {
+            Image img = icon.getImage();
+            // initialiseur d'instance
+            {setOpaque(false);}
+            public void paintComponent(Graphics graphics)
+            {
+                graphics.drawImage(img, 0, 0, this);
+                super.paintComponent(graphics);
+            }
+        };
+
+
+
         SwingUtilities.invokeLater(new Runnable() {
 
                 public void run() {
                     GrilleSimple m = new GrilleSimple();
                     VC vc = new VC(m);
                     vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    JScrollPane pane = new JScrollPane(text);
+                    Container content = vc.getContentPane();
+                    content.add(pane, BorderLayout.CENTER);
                     m.addObserver(vc);
                     vc.setVisible(true);
 

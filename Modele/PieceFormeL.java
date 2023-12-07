@@ -13,8 +13,8 @@ public class PieceFormeL extends Piece{
                 tabBool[i][j] = false;
             }
         }
-        x = 5;
-        y = 5;
+        x = 3;
+        y = 0;
         tabBool[0][1] = true;
         tabBool[1][1] = true;
         tabBool[2][1] = true;

@@ -19,13 +19,13 @@ public class VuePieceSuivante extends JPanel implements Observer {
         modele = _modele;
         int TAILLE_X_PIECE_SUIVANTE = modele.getPieceSuivante().getLignes();
         int TAILLE_Y_PIECE_SUIVANTE = modele.getPieceSuivante().getColonnes();
-        setLayout(new GridLayout(TAILLE_X_PIECE_SUIVANTE, TAILLE_Y_PIECE_SUIVANTE));
+        setLayout(new GridLayout(4, 4));
         Border blackline = BorderFactory.createLineBorder(Color.gray,1);
         //setBorder(blackline);
-        tab = new JPanel[TAILLE_X_PIECE_SUIVANTE][TAILLE_Y_PIECE_SUIVANTE];
+        tab = new JPanel[4][4];
 
-        for (int i = 0; i < TAILLE_X_PIECE_SUIVANTE; i++) {
-            for (int j = 0; j < TAILLE_Y_PIECE_SUIVANTE; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 JPanel caseG = new JPanel();
                 tab[i][j] = caseG;
                 caseG.setBorder(blackline);
@@ -35,10 +35,10 @@ public class VuePieceSuivante extends JPanel implements Observer {
     }
 
     public void dessineGrilleSwing(JPanel[][] tab){
-        int TAILLE_X_PIECE_SUIVANTE = modele.getPieceSuivante().getLignes();
-        int TAILLE_Y_PIECE_SUIVANTE = modele.getPieceSuivante().getColonnes();
-        for(int i = 0; i< TAILLE_X_PIECE_SUIVANTE;i++){
-            for (int j = 0; j < TAILLE_Y_PIECE_SUIVANTE; j++) {
+        //int TAILLE_X_PIECE_SUIVANTE = modele.getPieceSuivante().getLignes();
+        //int TAILLE_Y_PIECE_SUIVANTE = modele.getPieceSuivante().getColonnes();
+        for(int i = 0; i< 4;i++){
+            for (int j = 0; j < 4; j++) {
                 tab[i][j].setBackground(Color.black);
             }
         }
@@ -46,10 +46,11 @@ public class VuePieceSuivante extends JPanel implements Observer {
 
     public void dessinePieceSwing(JPanel[][] tab){
         //debut
+
         for (int i = 0; i < modele.getPieceSuivante().getLignes();i++){
             for(int j = 0; j < modele.getPieceSuivante().getColonnes();j++){
                 if(modele.getPieceSuivante().getTabBooli(i,j)){
-                    tab[i][j].setBackground(modele.getPieceSuivante().couleurPiece);
+                    tab[i][j+1].setBackground(modele.getPieceSuivante().couleurPiece);
                 }
 
             }

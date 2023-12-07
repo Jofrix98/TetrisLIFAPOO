@@ -13,7 +13,7 @@ public class PieceFormeT extends Piece{
                 tabBool[i][j] = false;
             }
         }
-        x = 9;
+        x = 3;
         y = 0;
         tabBool[1][0] = true;
         tabBool[0][1] = true;

@@ -88,7 +88,7 @@ public abstract class Piece implements Runnable{
         boolean position_valide = true;
         for(int i=0;i< getLignes();i++){
             for(int j=0;j< getColonnes();j++){
-                if (tabBool[i][j] && ((i + x + 1 == grille.TAILLE) || (grille.matGrille[i+x+1][j+y] != java.awt.Color.BLACK))) {
+                if (tabBool[i][j] && ((i + x + 1 == grille.LARGEUR) || (grille.matGrille[i+x+1][j+y] != java.awt.Color.BLACK))) {
                     position_valide = false;
                 }
             }
@@ -122,7 +122,7 @@ public abstract class Piece implements Runnable{
     }
 
     public boolean pieceAuFond(){
-        if(y+1 == grille.TAILLE){
+        if(y+1 == grille.LONGUEUR){
             return true;
         }
         else {
@@ -130,11 +130,12 @@ public abstract class Piece implements Runnable{
         }
     }
 
+
     public boolean checkCollision(){
         boolean stop = false;
         for(int i=0;i< getLignes();i++){
             for(int j=0;j< getColonnes();j++){
-                if (tabBool[i][j] && ((j + y + 1 == grille.TAILLE) || (grille.matGrille[i+x][j+1+y] != java.awt.Color.BLACK))) {
+                if (tabBool[i][j] && ((j + y + 1 == grille.LONGUEUR) || (grille.matGrille[i+x][j+1+y] != java.awt.Color.BLACK))) {
                     stop = true;
                 }
             }
@@ -153,9 +154,11 @@ public abstract class Piece implements Runnable{
         }
     }
 
+
     public void descenteRapide(){
         grille.getOrdonnanceurSimple().setTempsExecution(100);
     }
+
 
 }
 
