@@ -26,7 +26,7 @@ public class VC extends JFrame implements Observer {
     GrilleSimple modele;
 
     Observer vueGrille;
-    //Observer vuePieceSuivante;
+    Observer vuePieceSuivante;
 
     KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
@@ -38,10 +38,12 @@ public class VC extends JFrame implements Observer {
 
         setSize(450, 400);
         JPanel jp = new JPanel(new BorderLayout());
-        jp.add(jt, BorderLayout.NORTH);
-        jp.add(jb, BorderLayout.SOUTH);
-        jp.add(jb2, BorderLayout.EAST);
-        jp.add(jb3, BorderLayout.WEST);
+        //jt.setBounds(0, 0, 50, 50);
+        //jb3.setBounds(0, 0, 25, 400);
+        //jp.add(jt);
+        //jp.add(jb);
+        //jp.add(jb2, BorderLayout.EAST);
+        //jp.add(jb3, BorderLayout.WEST);
 
         vueGrille = new VueGrilleV1(modele); // composants swing, saccades
         //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
@@ -49,11 +51,10 @@ public class VC extends JFrame implements Observer {
         jp.add((JPanel)vueGrille, BorderLayout.CENTER);
         setContentPane(jp);
 
-        JPanel panelPieceSuivante = new JPanel(new GridLayout(5, 5));
-
-        //vuePieceSuivante = new VuePieceSuivante(panelPieceSuivante, modele);
-
-        jp.add(panelPieceSuivante, BorderLayout.EAST);
+        vuePieceSuivante = new VuePieceSuivante(modele);
+        JPanel panelVuePieceSuivante = (JPanel) vuePieceSuivante;
+        //panelVuePieceSuivante.setBounds(0, 0, 20, 20);
+        jp.add(panelVuePieceSuivante, BorderLayout.EAST);
 
         jb3.addActionListener(new ActionListener() {
 
@@ -84,7 +85,11 @@ public class VC extends JFrame implements Observer {
                 //System.out.println("key event");
                 if(e.getID() == KeyEvent.KEY_PRESSED) {
                     switch (e.getKeyCode()) {
+
                         case KeyEvent.VK_UP:
+
+                        case KeyEvent.VK_SPACE:
+
                             modele.getPieceCourante().rotation();
                             break;
                         case KeyEvent.VK_LEFT:
@@ -94,14 +99,13 @@ public class VC extends JFrame implements Observer {
                             modele.getPieceCourante().mvtDroit();
                             break;
                         case KeyEvent.VK_DOWN:
-                            modele.getPieceCourante().descenteRapide();
+                            modele.getOrdonnanceurSimple().setTempsExecution(100);
                     }
-
                 }
 
                 else if (e.getID() == KeyEvent.KEY_RELEASED) {
                     if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        modele.getOrdonnanceurSimple().retourInitiale(); // Réinitialisation du temps d'exécution
+                        modele.getOrdonnanceurSimple().setTempsExecution(500); // Réinitialisation du temps d'exécution
                     }
                 }
 
@@ -124,7 +128,7 @@ public class VC extends JFrame implements Observer {
             //@Override
             public void run() {
                 vueGrille.update(o, arg);
-                //vuePieceSuivante.update(o, arg);
+                vuePieceSuivante.update(o, arg);
                 jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x = " + modele.getPieceCourante().getX() + " y = " + modele.getPieceCourante().getY());
                 lastTime = System.currentTimeMillis();
 

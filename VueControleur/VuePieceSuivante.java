@@ -13,17 +13,19 @@ import java.util.Observer;
 public class VuePieceSuivante extends JPanel implements Observer {
     JPanel[][] tab;
     GrilleSimple modele;
-    public final int TAILLE_PIECE_SUIVANTE = 20;
+
 
     public VuePieceSuivante(GrilleSimple _modele) {
         modele = _modele;
-        setLayout(new GridLayout(TAILLE_PIECE_SUIVANTE, TAILLE_PIECE_SUIVANTE));
+        int TAILLE_X_PIECE_SUIVANTE = modele.getPieceSuivante().getLignes();
+        int TAILLE_Y_PIECE_SUIVANTE = modele.getPieceSuivante().getColonnes();
+        setLayout(new GridLayout(TAILLE_X_PIECE_SUIVANTE, TAILLE_Y_PIECE_SUIVANTE));
         Border blackline = BorderFactory.createLineBorder(Color.gray,1);
         //setBorder(blackline);
-        tab = new JPanel[TAILLE_PIECE_SUIVANTE][TAILLE_PIECE_SUIVANTE];
+        tab = new JPanel[TAILLE_X_PIECE_SUIVANTE][TAILLE_Y_PIECE_SUIVANTE];
 
-        for (int i = 0; i < TAILLE_PIECE_SUIVANTE; i++) {
-            for (int j = 0; j < TAILLE_PIECE_SUIVANTE; j++) {
+        for (int i = 0; i < TAILLE_X_PIECE_SUIVANTE; i++) {
+            for (int j = 0; j < TAILLE_Y_PIECE_SUIVANTE; j++) {
                 JPanel caseG = new JPanel();
                 tab[i][j] = caseG;
                 caseG.setBorder(blackline);
@@ -32,18 +34,34 @@ public class VuePieceSuivante extends JPanel implements Observer {
         }
     }
 
-    public void DessinePieceSuivanteSwing(JPanel[][] tab) {
-        Piece pieceSuivante = modele.getPieceSuivante();
-        for (int i = 0; i < pieceSuivante.getLignes(); i++) {
-            for (int j = 0; j < pieceSuivante.getColonnes(); j++) {
-                tab[i][j].setBackground(pieceSuivante.getTabBooli(i, j) ?
-                        pieceSuivante.couleurPiece : Color.BLACK);
+    public void dessineGrilleSwing(JPanel[][] tab){
+        int TAILLE_X_PIECE_SUIVANTE = modele.getPieceSuivante().getLignes();
+        int TAILLE_Y_PIECE_SUIVANTE = modele.getPieceSuivante().getColonnes();
+        for(int i = 0; i< TAILLE_X_PIECE_SUIVANTE;i++){
+            for (int j = 0; j < TAILLE_Y_PIECE_SUIVANTE; j++) {
+                tab[i][j].setBackground(Color.black);
             }
         }
     }
 
+    public void dessinePieceSwing(JPanel[][] tab){
+        //debut
+        for (int i = 0; i < modele.getPieceSuivante().getLignes();i++){
+            for(int j = 0; j < modele.getPieceSuivante().getColonnes();j++){
+                if(modele.getPieceSuivante().getTabBooli(i,j)){
+                    tab[i][j].setBackground(modele.getPieceSuivante().couleurPiece);
+                }
+
+            }
+        }
+        //fin
+    }
+
+
+
     @Override
     public void update(Observable o, Object arg) {
-        this.DessinePieceSuivanteSwing(tab);
+        this.dessineGrilleSwing(tab);
+        this.dessinePieceSwing(tab);
     }
 }
