@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 public class VC extends JFrame implements Observer {
 
-    JTextField jt = new JTextField("");
+    JTextArea jt = new JTextArea("");
 
     JButton jb = new JButton("Rotation");
 
@@ -37,14 +37,19 @@ public class VC extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         modele = _modele;
 
-        setSize(400, 450);
+        setSize(450, 450);
         JPanel jp = new JPanel(new FlowLayout());
         //jt.setBounds(0, 0, 50, 50);
         //jb3.setBounds(0, 0, 25, 400);
-        //jp.add(jt);
+       // jp.add(jt);
         //jp.add(jb);
         //jp.add(jb2, BorderLayout.EAST);
         //jp.add(jb3, BorderLayout.WEST);
+
+        Dimension Dime2 = new Dimension(100, 30);
+        jt.setPreferredSize(Dime2);
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jp.add(jt);
 
 
 
@@ -64,6 +69,7 @@ public class VC extends JFrame implements Observer {
         //panelVuePieceSuivante.setBounds(0, 0, 20, 20);
         jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
         jp.add((JPanel)panelVuePieceSuivante);
+
 
 
         jb3.addActionListener(new ActionListener() {
@@ -141,7 +147,7 @@ public class VC extends JFrame implements Observer {
             public void run() {
                 vueGrille.update(o, arg);
                 vuePieceSuivante.update(o, arg);
-                jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x = " + modele.getPieceCourante().getX() + " y = " + modele.getPieceCourante().getY());
+                jt.setText("Points : " + modele.points);
                 lastTime = System.currentTimeMillis();
 
             }
@@ -152,17 +158,7 @@ public class VC extends JFrame implements Observer {
     public static void main(String[] args) {
 
         final ImageIcon icon = new ImageIcon("data/Tetriss.jpeg");
-        JTextArea text = new JTextArea()
-        {
-            Image img = icon.getImage();
-            // initialiseur d'instance
-            {setOpaque(false);}
-            public void paintComponent(Graphics graphics)
-            {
-                graphics.drawImage(img, 0, 0, this);
-                super.paintComponent(graphics);
-            }
-        };
+
 
 
 
@@ -172,9 +168,6 @@ public class VC extends JFrame implements Observer {
                     GrilleSimple m = new GrilleSimple();
                     VC vc = new VC(m);
                     vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    JScrollPane pane = new JScrollPane(text);
-                    Container content = vc.getContentPane();
-                    content.add(pane, BorderLayout.CENTER);
                     m.addObserver(vc);
                     vc.setVisible(true);
 

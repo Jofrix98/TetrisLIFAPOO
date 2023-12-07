@@ -19,6 +19,8 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public java.awt.Color[][] matGrille;
 
+    public int points;
+
 
     //Commentaire test
     public GrilleSimple() {
@@ -34,6 +36,7 @@ public class GrilleSimple extends Observable implements Runnable {
         pieceSuivante = new PieceSuivante();
 
         pieceCourante = pieceSuivante.nouvellePiece(this);
+        points = 0;
     }
 
     public Piece getPieceSuivante() {
@@ -78,7 +81,9 @@ public class GrilleSimple extends Observable implements Runnable {
         if(bottomLastPiece()){
             pieceCourante = getPieceSuivante();
             incrementerFilePiece();
+
         }
+
     }
     public boolean bottomLastPiece(){
         if(pieceCourante.getDY() == 0){
@@ -94,6 +99,7 @@ public class GrilleSimple extends Observable implements Runnable {
                 return false;
             }
         }
+        points += 100;
         return true;
     }
 
