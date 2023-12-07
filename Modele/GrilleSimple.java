@@ -8,24 +8,26 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class GrilleSimple extends Observable implements Runnable {
+public class GrilleSimple {
 
     public final int LONGUEUR = 22;
     public final int LARGEUR = 10;
     private FilePieces filePiecesSuivantes;
     private Piece pieceCourante;
     private PieceSuivante pieceSuivante;
-    private OrdonnanceurSimple ordonnanceurSimple;
+    private Partie partie;
+
 
     public java.awt.Color[][] matGrille;
+    private IA ia;
 
     public int points;
 
 
-    //Commentaire test
     public GrilleSimple() {
-        ordonnanceurSimple = new OrdonnanceurSimple(this);
-        ordonnanceurSimple.start(); // pour changer le temps de pause, garder la référence de l'ordonnanceur
+
+
+
         matGrille = new java.awt.Color[this.LARGEUR][this.LONGUEUR];
         for (int x = 0; x < this.LARGEUR; x ++){
             for(int y = 0; y < this.LONGUEUR; y ++){
@@ -35,21 +37,38 @@ public class GrilleSimple extends Observable implements Runnable {
         filePiecesSuivantes = new FilePieces(this);
         pieceSuivante = new PieceSuivante();
 
-        pieceCourante = pieceSuivante.nouvellePiece(this);
-        points = 0;
-    }
 
+        pieceCourante = pieceSuivante.nouvellePiece(this, partie);
+
+
+        ia = new IAJoueurAutomatique();
+    }
+    public void setPartie(Partie _partie){
+        partie = _partie;
+    }
+    public Partie getPartie(){
+        return partie;
+    }
     public Piece getPieceSuivante() {
         return filePiecesSuivantes.getPieceSuivante();
+    }
+    public void setPieceSuivante(Piece _pieceSuivante){
+        this.filePiecesSuivantes.setPieceSuivante(_pieceSuivante);
+    }
+
+    public FilePieces getFilePiecesSuivantes() {
+        return filePiecesSuivantes;
+    }
+
+    public void setFilePiecesSuivantes(FilePieces _filePiecesSuivantes) {
+        this.filePiecesSuivantes = _filePiecesSuivantes;
     }
 
     public void incrementerFilePiece() {
         filePiecesSuivantes.incrementerPiece();
     }
 
-    public OrdonnanceurSimple getOrdonnanceurSimple(){
-        return ordonnanceurSimple;
-    }
+
 
     public void action() {
         pieceCourante.action();
@@ -68,14 +87,17 @@ public class GrilleSimple extends Observable implements Runnable {
                 effacerLigne(y);
             }
         }
+        //iaMove();
         //System.out.println(terminerPartie());
-        setChanged();
-        notifyObservers();
+
     }
 
 
     public Piece getPieceCourante() {
         return pieceCourante;
+    }
+    public void setPieceCourante(Piece _pieceCourante){
+        this.pieceCourante = _pieceCourante;
     }
     public void incrementerPiece(){
         if(bottomLastPiece()){
@@ -126,6 +148,16 @@ public class GrilleSimple extends Observable implements Runnable {
             }
         }
         return res;
+    }
+
+
+    private void iaMove() {
+        int decision = ia.choisirMouvement(this);
+        if (decision < 0) {
+            this.getPieceCourante().mvtGauche();
+        } else if (decision > 0) {
+            this.getPieceCourante().mvtDroit();
+        }
     }
 
 }

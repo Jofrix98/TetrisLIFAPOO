@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class PieceFormeS extends Piece{
 
-    public PieceFormeS(GrilleSimple _grille){
-        super(_grille);
+    public PieceFormeS(GrilleSimple _grille, Partie _partie){
+        super(_grille, _partie);
         couleurPiece = java.awt.Color.RED;
         tabBool = new boolean[3][3];
         for(int i=0;i<3;i++){

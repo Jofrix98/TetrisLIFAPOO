@@ -15,9 +15,9 @@ public class FilePieces {
     }
 
     private void remplirFilePiecesSuivantes() {
-        filePieces.add(pieceSuivante.nouvellePiece(grille));
-        filePieces.add(pieceSuivante.nouvellePiece(grille));
-        filePieces.add(pieceSuivante.nouvellePiece(grille));
+        filePieces.add(pieceSuivante.nouvellePiece(grille, grille.getPartie()));
+        filePieces.add(pieceSuivante.nouvellePiece(grille, grille.getPartie()));
+        filePieces.add(pieceSuivante.nouvellePiece(grille, grille.getPartie()));
     }
 
     public Piece getPieceSuivante() {
@@ -26,6 +26,10 @@ public class FilePieces {
 
     public void incrementerPiece() {
         filePieces.poll(); // Retire la pièce suivante de la file.
-        filePieces.add(pieceSuivante.nouvellePiece(grille)); // Ajoute une nouvelle pièce à la fin de la file.
+        filePieces.add(pieceSuivante.nouvellePiece(grille, grille.getPartie())); // Ajoute une nouvelle pièce à la fin de la file.
+    }
+
+    public void setPieceSuivante(Piece _pieceSuivante){
+        filePieces.add(_pieceSuivante);
     }
 }

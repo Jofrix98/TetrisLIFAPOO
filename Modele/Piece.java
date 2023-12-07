@@ -14,13 +14,15 @@ public abstract class Piece implements Runnable{
     protected int dY = 1;
     protected boolean [][] tabBool;
     protected GrilleSimple grille;
+    protected Partie partie;
 
+    public Piece(GrilleSimple _grille, Partie _partie){
+        partie = _partie;
+        ordoPiece = new OrdonnanceurSimple(this);
+        ordoPiece.start();
+        ordoPiece.setTempsExecution(10);
+        grille = _grille;
 
-    public Piece(GrilleSimple _grille){
-     ordoPiece = new OrdonnanceurSimple(this);
-     ordoPiece.start();
-     ordoPiece.setTempsExecution(10);
-     grille = _grille;
     }
 
     public java.awt.Color couleurPiece;
@@ -156,7 +158,9 @@ public abstract class Piece implements Runnable{
 
 
     public void descenteRapide(){
-        grille.getOrdonnanceurSimple().setTempsExecution(100);
+
+        partie.getOrdonnanceurSimple().setTempsExecution(100);
+
     }
 
 

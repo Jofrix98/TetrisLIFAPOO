@@ -1,6 +1,7 @@
 package VueControleur;
 
 import Modele.GrilleSimple;
+import Modele.Partie;
 import Modele.PieceFormeI;
 
 import javax.swing.*;
@@ -13,18 +14,20 @@ import java.util.Observer;
 
 public class VueGrilleV1 extends JPanel implements Observer {
     JPanel[][] tab;
-    GrilleSimple modele;
+    Partie modele;
 
 
-    public VueGrilleV1(GrilleSimple _modele) {
+    public VueGrilleV1(Partie _modele) {
         modele = _modele;
-        setLayout(new GridLayout(modele.LONGUEUR, modele.LARGEUR));
+
+        setLayout(new GridLayout(modele.getGrilleJoueur1().LONGUEUR, modele.getGrilleJoueur1().LARGEUR));
         Border blackline = BorderFactory.createLineBorder(Color.gray,1);
         //setBorder(blackline);
-        tab = new JPanel[modele.LARGEUR][modele.LONGUEUR];
+        tab = new JPanel[modele.getGrilleJoueur1().LARGEUR][modele.getGrilleJoueur1().LONGUEUR];
 
-        for(int j = 0; j<modele.LONGUEUR;j++){
-            for (int i = 0; i < modele.LARGEUR; i++) {
+        for(int j = 0; j<modele.getGrilleJoueur1().LONGUEUR;j++){
+            for (int i = 0; i < modele.getGrilleJoueur1().LARGEUR; i++) {
+
                 JPanel caseG = new JPanel();
                 tab[i][j] = caseG;
                 caseG.setBorder(blackline);
@@ -40,8 +43,8 @@ public class VueGrilleV1 extends JPanel implements Observer {
 
                 tab[i][j].setBackground(Color.black);
 
-                if(modele.matGrille[i][j] != Color.BLACK){
-                    tab[i][j].setBackground(modele.matGrille[i][j]);
+                if(modele.getGrilleJoueur1().matGrille[i][j] != Color.BLACK){
+                    tab[i][j].setBackground(modele.getGrilleJoueur1().matGrille[i][j]);
                 }
 
             }
@@ -49,10 +52,10 @@ public class VueGrilleV1 extends JPanel implements Observer {
     }
     public void DessinePieceSwing(JPanel[][] tab){
         //debut
-        for (int i = 0; i < modele.getPieceCourante().getLignes();i++){
-            for(int j=0;j< modele.getPieceCourante().getColonnes();j++){
-                if(modele.getPieceCourante().getTabBooli(i,j)){
-                    tab[i+modele.getPieceCourante().getX()][j+ modele.getPieceCourante().getY()].setBackground(modele.getPieceCourante().couleurPiece);
+        for (int i = 0; i < modele.getGrilleJoueur1().getPieceCourante().getLignes();i++){
+            for(int j=0;j< modele.getGrilleJoueur1().getPieceCourante().getColonnes();j++){
+                if(modele.getGrilleJoueur1().getPieceCourante().getTabBooli(i,j)){
+                    tab[i+modele.getGrilleJoueur1().getPieceCourante().getX()][j+ modele.getGrilleJoueur1().getPieceCourante().getY()].setBackground(modele.getGrilleJoueur1().getPieceCourante().couleurPiece);
                 }
 
             }

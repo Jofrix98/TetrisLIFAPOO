@@ -1,9 +1,7 @@
 package VueControleur;
 
-import Modele.GrilleSimple;
-import Modele.PieceFormeC;
-import Modele.PieceFormeI;
-import Modele.PieceFormeJ;
+import Modele.*;
+
 
 
 import javax.swing.*;
@@ -16,84 +14,55 @@ import java.util.concurrent.Executors;
 
 public class VC extends JFrame implements Observer {
 
-    JTextArea jt = new JTextArea("");
+    Partie partie;
+    GrilleSimple modeleJoueur1;
+    GrilleSimple modeleJoueur2;
+    Observer vueGrilleJoueur1;
+    Observer vueGrilleJoueur2;
 
-    JButton jb = new JButton("Rotation");
-
-    JButton jb2 = new JButton("Droite");
-
-    JButton jb3 = new JButton("Gauche");
-
-    GrilleSimple modele;
-
-    Observer vueGrille;
     Observer vuePieceSuivante;
 
+    JTextField jt = new JTextField("");
     KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-
     private Executor ex =  Executors.newSingleThreadExecutor();
 
-    public VC(GrilleSimple _modele) {
+    public VC(GrilleSimple _modeleJoueur1, GrilleSimple _modeleJoueur2) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        modele = _modele;
-
-        setSize(450, 450);
+        modeleJoueur1 = _modeleJoueur1;
+        modeleJoueur2 = _modeleJoueur2;
+        partie = new Partie(modeleJoueur1, modeleJoueur2);
+        setSize(800, 450);
         JPanel jp = new JPanel(new FlowLayout());
-        //jt.setBounds(0, 0, 50, 50);
-        //jb3.setBounds(0, 0, 25, 400);
-       // jp.add(jt);
-        //jp.add(jb);
-        //jp.add(jb2, BorderLayout.EAST);
-        //jp.add(jb3, BorderLayout.WEST);
-
-        Dimension Dime2 = new Dimension(100, 30);
-        jt.setPreferredSize(Dime2);
-        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
-        jp.add(jt);
 
 
-
-        vueGrille = new VueGrilleV1(modele); // composants swing, saccades
-        JPanel panelVueGrille = (JPanel) vueGrille;
+        vueGrilleJoueur1 = new VueGrilleV1(partie); // composants swing, saccades
+        JPanel panelvueGrilleJoueur1 = (JPanel) vueGrilleJoueur1;
         //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
         Dimension newDimension = new Dimension(200, 410);
-        panelVueGrille.setPreferredSize(newDimension);
+        panelvueGrilleJoueur1.setPreferredSize(newDimension);
         jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jp.add(panelVueGrille);
+        jp.add(panelvueGrilleJoueur1);
+
         setContentPane(jp);
 
-        vuePieceSuivante = new VuePieceSuivante(modele);
+        vueGrilleJoueur2 = new VueGrilleV1(partie); // composants swing, saccades
+        JPanel panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
+        //vueGrille = new VueGrilleV2(modele); // composant AWT dédié
+        Dimension newDimension1 = new Dimension(200, 410);
+        panelVueGrilleJoueur2.setPreferredSize(newDimension1);
+        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.add(panelVueGrilleJoueur2);
+        setContentPane(jp);
+
+        vuePieceSuivante = new VuePieceSuivante(partie.getGrilleJoueur1());
         JPanel panelVuePieceSuivante = (JPanel) vuePieceSuivante;
         Dimension Dime = new Dimension(100, 100);
         panelVuePieceSuivante.setPreferredSize(Dime);
-        //panelVuePieceSuivante.setBounds(0, 0, 20, 20);
+
+
+
         jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
         jp.add((JPanel)panelVuePieceSuivante);
-
-
-
-        jb3.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                modele.getPieceCourante().mvtGauche();
-
-            }
-
-        });
-        jb2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                modele.getPieceCourante().mvtDroit();
-            }
-
-        });
-
-        jb.addActionListener(new ActionListener() { //évènement bouton : object contrôleur qui réceptionne
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                modele.getPieceCourante().rotation();
-            }
-        });
-
 
         manager.addKeyEventDispatcher(new KeyEventDispatcher() {
             @Override
@@ -102,32 +71,43 @@ public class VC extends JFrame implements Observer {
                 if(e.getID() == KeyEvent.KEY_PRESSED) {
                     switch (e.getKeyCode()) {
 
-                        case KeyEvent.VK_UP:
 
                         case KeyEvent.VK_SPACE:
+                            partie.getGrilleJoueur2().getPieceCourante().rotation();
 
-                            modele.getPieceCourante().rotation();
                             break;
                         case KeyEvent.VK_LEFT:
-                            modele.getPieceCourante().mvtGauche();
+                            partie.getGrilleJoueur2().getPieceCourante().mvtGauche();
                             break;
                         case KeyEvent.VK_RIGHT:
-                            modele.getPieceCourante().mvtDroit();
+                            partie.getGrilleJoueur2().getPieceCourante().mvtDroit();
                             break;
                         case KeyEvent.VK_DOWN:
-                            modele.getOrdonnanceurSimple().setTempsExecution(100);
+                            partie.getOrdonnanceurSimple().setTempsExecution(100);
+
+                        case KeyEvent.VK_E:
+                            partie.getGrilleJoueur1().getPieceCourante().rotation();
+                            break;
+                        case KeyEvent.VK_A, KeyEvent.VK_Q:
+                            partie.getGrilleJoueur1().getPieceCourante().mvtGauche();
+                            break;
+                        case KeyEvent.VK_D:
+                            partie.getGrilleJoueur1().getPieceCourante().mvtDroit();
+                            break;
+                        case KeyEvent.VK_S:
+                            partie.getOrdonnanceurSimple().setTempsExecution(100);
                     }
                 }
 
                 else if (e.getID() == KeyEvent.KEY_RELEASED) {
                     if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        modele.getOrdonnanceurSimple().setTempsExecution(500); // Réinitialisation du temps d'exécution
+                        partie.getOrdonnanceurSimple().setTempsExecution(500); // Réinitialisation du temps d'exécution
+                    }
+                    if (e.getKeyCode() == KeyEvent.VK_S) {
+                        partie.getOrdonnanceurSimple().setTempsExecution(500); // Réinitialisation du temps d'exécution
                     }
                 }
 
-                // Renvoyer `true` pour dire que l'event est consommé
-                // (=> il ne sera traité par personne d'autre)
-                // ou `false` pour propager l'event au prochain Listener
                 return false;
             }
         });
@@ -145,11 +125,13 @@ public class VC extends JFrame implements Observer {
         SwingUtilities.invokeLater(new Runnable() {
             //@Override
             public void run() {
-                vueGrille.update(o, arg);
+                vueGrilleJoueur1.update(o, arg);
+                vueGrilleJoueur2.update(o, arg);
                 vuePieceSuivante.update(o, arg);
-                jt.setText("Points : " + modele.points);
-                lastTime = System.currentTimeMillis();
 
+                //jt.setText("Points : " + modele.points);
+
+                lastTime = System.currentTimeMillis();
             }
         });
 
@@ -159,16 +141,32 @@ public class VC extends JFrame implements Observer {
 
         final ImageIcon icon = new ImageIcon("data/Tetriss.jpeg");
 
+        JTextArea text = new JTextArea()
+        {
+            Image img = icon.getImage();
+            {setOpaque(false);}
+            public void paintComponent(Graphics graphics)
+            {
+                graphics.drawImage(img, 0, 0, this);
+                super.paintComponent(graphics);
+            }
+        };
+
 
 
 
         SwingUtilities.invokeLater(new Runnable() {
 
                 public void run() {
-                    GrilleSimple m = new GrilleSimple();
-                    VC vc = new VC(m);
+                    GrilleSimple mJ1 = new GrilleSimple();
+                    GrilleSimple mJ2 = new GrilleSimple();
+                    VC vc = new VC(mJ1, mJ2);
+                    Partie partie = new Partie(mJ1, mJ2);
                     vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    m.addObserver(vc);
+                    JScrollPane pane = new JScrollPane(text);
+                    Container content = vc.getContentPane();
+                    content.add(pane, BorderLayout.CENTER);
+                    partie.addObserver(vc);
                     vc.setVisible(true);
 
                 }
