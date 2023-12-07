@@ -1,4 +1,4 @@
-package VueControleur;
+/*package VueControleur;
 
 import Modele.GrilleSimple;
 import Modele.PieceFormeI;
@@ -83,3 +83,4 @@ class VueGrilleV2 extends JPanel implements Observer {
         bs.show();
     }
 }
+*/

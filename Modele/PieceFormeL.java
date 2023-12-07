@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class PieceFormeL extends Piece{
 
-    public PieceFormeL(GrilleSimple _grille) {
-        super(_grille);
+    public PieceFormeL(GrilleSimple _grille, Partie _partie) {
+        super(_grille, _partie);
         tabBool = new boolean[3][3];
         couleurPiece = java.awt.Color.ORANGE;
         for(int i=0;i<3;i++){
@@ -13,8 +13,8 @@ public class PieceFormeL extends Piece{
                 tabBool[i][j] = false;
             }
         }
-        x = 5;
-        y = 5;
+        x = 3;
+        y = 0;
         tabBool[0][1] = true;
         tabBool[1][1] = true;
         tabBool[2][1] = true;
