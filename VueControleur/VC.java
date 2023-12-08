@@ -164,6 +164,7 @@ public class VC extends JFrame implements Observer {
                     GrilleSimple mJ2 = new GrilleSimple();
                     VC vc = new VC(mJ1, mJ2);
                     Partie partie = new Partie(mJ1, mJ2);
+                    if(partie.partieTerminee()){System.exit(0);}
                     vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     partie.addObserver(vc);
                     vc.setVisible(true);

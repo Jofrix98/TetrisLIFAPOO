@@ -163,19 +163,7 @@ public abstract class Piece implements Runnable{
 
     }
 
-    public boolean estAuSommet(){
-        for(int i=0;i< getLignes();i++){
-            for(int j=0;j< getColonnes();j++){
-                if (tabBool[i][j] && (j + y - 1 <= 0) ) {
 
-                    return true;
-                }
-            }
-        }
-
-        return false;
-
-    }
 
 }
 

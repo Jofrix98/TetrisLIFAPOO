@@ -11,8 +11,6 @@ public class OrdonnanceurSimple extends Thread {
     private long getTempsExecutionmvt = 1;
     public OrdonnanceurSimple(Runnable _monRunnable) {
         monRunnable = _monRunnable;
-
-
     }
 
     public void setTempsExecution(long _tempsExecution){
@@ -22,8 +20,6 @@ public class OrdonnanceurSimple extends Thread {
     public void retourInitiale(){
         tempsExecution = 500;
     }
-
-
 
     @Override
     public void run() {

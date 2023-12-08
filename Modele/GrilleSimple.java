@@ -162,8 +162,10 @@ public class GrilleSimple {
     }
 
     public boolean grillePleine(){
-            if(pieceCourante.estAuSommet()){
-                return true;
+            for(int i=0;i<LARGEUR;i++) {
+                if(matGrille[i][0] != java.awt.Color.BLACK){
+                    return true;
+                }
             }
         return false;
     }
