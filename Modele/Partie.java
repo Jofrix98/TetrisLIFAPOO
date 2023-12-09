@@ -29,7 +29,7 @@ public class Partie {
 
     public boolean partieTerminee(){
         if(grilleJoueur1.grillePleine() || grilleJoueur2.grillePleine()){
-
+            System.out.println("Un des deux joueurs a perdu");
             return true;
         }
         return false;

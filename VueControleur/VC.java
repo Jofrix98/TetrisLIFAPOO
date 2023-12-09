@@ -20,8 +20,12 @@ public class VC extends JFrame implements Observer {
     Observer vueGrilleJoueur2;
     Observer vuePieceSuivante;
     Observer vuePartieTerminee;
-
+    JPanel jp;
     JTextField jt = new JTextField("");
+    JPanel panelvueGrilleJoueur1;
+    JPanel panelVueGrilleJoueur2;
+    JPanel panelVuePieceSuivante;
+    JPanel panelvuePartieTerminee;
     private Executor ex = Executors.newSingleThreadExecutor();
 
     public VC(GrilleSimple _modeleJoueur1, GrilleSimple _modeleJoueur2) {
@@ -31,44 +35,42 @@ public class VC extends JFrame implements Observer {
         partie = new Partie(modeleJoueur1, modeleJoueur2);
         setSize(700, 450);
 
-        //vuePartieTerminee = new VuePartieTerminee(_modeleJoueur1);
+        vueGrilleJoueur1 = new VueGrilleV1(modeleJoueur1);
+        vueGrilleJoueur2 = new VueGrilleV1(modeleJoueur2);
+        vuePieceSuivante = new VuePieceSuivante(partie.getGrilleJoueur1());
+        vuePartieTerminee = new VuePartieTerminee(_modeleJoueur1, _modeleJoueur2);
 
-        String imagePath = "data/Tetriss.jpeg";
-        ImagePanel imagePanel = new ImagePanel(imagePath);
-        add(imagePanel);
-
-        JPanel jp = new JPanel();
+        jp = new JPanel();
         jp.setLayout(new OverlayLayout(jp));
 
-        Dimension Dime2 = new Dimension(165, 50);
-        jt.setPreferredSize(Dime2);
-        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
-        jp.add(jt);
 
-        vueGrilleJoueur1 = new VueGrilleV1(modeleJoueur1);
-        JPanel panelvueGrilleJoueur1 = (JPanel) vueGrilleJoueur1;
-        Dimension newDimension = new Dimension(200, 410);
-        panelvueGrilleJoueur1.setPreferredSize(newDimension);
-        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jp.add(panelvueGrilleJoueur1);
+            Dimension Dime2 = new Dimension(165, 50);
+            jt.setPreferredSize(Dime2);
+            jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+            jp.add(jt);
 
-        setContentPane(jp);
 
-        vueGrilleJoueur2 = new VueGrilleV1(modeleJoueur2);
-        JPanel panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
-        Dimension newDimension1 = new Dimension(200, 410);
-        panelVueGrilleJoueur2.setPreferredSize(newDimension1);
-        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jp.add(panelVueGrilleJoueur2);
-        setContentPane(jp);
+            panelvueGrilleJoueur1 = (JPanel) vueGrilleJoueur1;
+            Dimension newDimension = new Dimension(200, 410);
+            panelvueGrilleJoueur1.setPreferredSize(newDimension);
+            jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+            jp.add(panelvueGrilleJoueur1);
 
-        vuePieceSuivante = new VuePieceSuivante(partie.getGrilleJoueur1());
-        JPanel panelVuePieceSuivante = (JPanel) vuePieceSuivante;
-        Dimension Dime = new Dimension(100, 100);
-        panelVuePieceSuivante.setPreferredSize(Dime);
+            setContentPane(jp);
 
-        jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        jp.add((JPanel) panelVuePieceSuivante);
+            panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
+            Dimension newDimension1 = new Dimension(200, 410);
+            panelVueGrilleJoueur2.setPreferredSize(newDimension1);
+            jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+            jp.add(panelVueGrilleJoueur2);
+            setContentPane(jp);
+
+            panelVuePieceSuivante = (JPanel) vuePieceSuivante;
+            Dimension Dime = new Dimension(100, 100);
+            panelVuePieceSuivante.setPreferredSize(Dime);
+
+            jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            jp.add((JPanel) panelVuePieceSuivante);
 
         // Ajouter un KeyListener pour le joueur 1
         addKeyListener(new KeyAdapter() {
@@ -150,7 +152,19 @@ public class VC extends JFrame implements Observer {
                 }
 
                 else{
-                    //vuePartieTerminee.update(o, arg);
+                    System.out.println("INN");
+                    jt.setVisible(false);
+                    panelvueGrilleJoueur1.setVisible(false);
+                    panelVueGrilleJoueur2.setVisible(false);
+                    panelVuePieceSuivante.setVisible(false);
+                    jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+                    boolean count = true;
+
+                    String imagePath = "data/Tetriss.jpeg";
+                    ImagePanel imagePanel = new ImagePanel(imagePath);
+                    add(imagePanel);
+
+                    setContentPane(jp);
                 }
             }
         });

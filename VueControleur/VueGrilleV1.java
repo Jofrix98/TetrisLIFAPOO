@@ -27,7 +27,6 @@ public class VueGrilleV1 extends JPanel implements Observer {
 
         for(int j = 0; j<modele.LONGUEUR;j++){
             for (int i = 0; i < modele.LARGEUR; i++) {
-
                 JPanel caseG = new JPanel();
                 tab[i][j] = caseG;
                 caseG.setBorder(blackline);

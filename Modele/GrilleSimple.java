@@ -170,8 +170,12 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public boolean grillePleine(){
-            if(pieceCourante.estAuSommet()){
-                return true;
+            for (int i = 0; i < LARGEUR; i++){
+                if(matGrille[i][0]!= java.awt.Color.BLACK){
+                    System.out.println("Collision à la ligne 0");
+                    return true;
+                }
+
             }
         return false;
     }

@@ -1,62 +1,34 @@
-/*package VueControleur;
+package VueControleur;
 
-import Modele.GrilleSimple;
-import Modele.Partie;
-import Modele.PieceFormeI;
+import Modele.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.*;
+import java.io.ObjectStreamClass;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+public class VuePartieTerminee extends JFrame implements Observer {
 
 
 
-public class VuePartieTerminee extends JPanel implements Observer {
-    JPanel[][] tab;
-    GrilleSimple modele;
+    public VuePartieTerminee(GrilleSimple _modeleJoueur1, GrilleSimple _modeleJoueur2) {
 
+        setSize(700, 450);
 
-    public VuePartieTerminee(GrilleSimple _modele) {
-        modele = _modele;
-        int largeur = 700;
-        int longueur = 450;
-        setLayout(new GridLayout(largeur, longueur));
-        Border blackline = BorderFactory.createLineBorder(Color.red,1);
-        //setBorder(blackline);
-        tab = new JPanel[largeur][modele.LONGUEUR];
+        String imagePath = "data/Tetriss.jpeg";
+        ImagePanel imagePanel = new ImagePanel(imagePath);
+        add(imagePanel);
 
-        for(int j = 0; j<modele.LONGUEUR;j++){
-            for (int i = 0; i < largeur; i++) {
-
-                JPanel caseG = new JPanel();
-                tab[i][j] = caseG;
-                caseG.setBorder(blackline);
-                add(caseG);
-            }
-        }
-
-    }
-
-    public void dessineGrilleSwing(JPanel[][] tab){
-        int largeur = 700;
-        int longueur = 450;
-        for(int i = 0; i< largeur;i++){
-            for (int j = 0; j < longueur; j++) {
-
-                tab[i][j].setBackground(Color.red);
-
-            }
-        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        this.dessineGrilleSwing(tab);
-
+        String imagePath = "data/Tetriss.jpeg";
+        ImagePanel imagePanel = new ImagePanel(imagePath);
+        add(imagePanel);
     }
-
 }
-*/
-
-
