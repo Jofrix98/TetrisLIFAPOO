@@ -45,12 +45,16 @@ public class VuePartieTerminee extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         dessineFondNoir(tab);
-        if(partie.partieTerminee() == 1){
-            labelPartieTerminee = new JLabel("Partie terminée: Gagneur Joueur 2");
+        if(partie.partieTerminee() == 2){
+            labelPartieTerminee = new JLabel("Partie terminée: Gagnant Joueur 2" );
         }
 
-        if(partie.partieTerminee() == 2){
-            labelPartieTerminee = new JLabel("Partie terminée: Gagneur Joueur 1");
+        if(partie.partieTerminee() == 1){
+            labelPartieTerminee = new JLabel("Partie terminée: Gagnant Joueur 1");
+        }
+
+        if(partie.partieTerminee() == 3){
+            labelPartieTerminee = new JLabel("Partie terminée: Aucun Gagnant");
         }
         labelPartieTerminee.setForeground(Color.WHITE); // Couleur du texte
         labelPartieTerminee.setHorizontalAlignment(JLabel.CENTER); // Alignement au centre

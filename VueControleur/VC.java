@@ -21,15 +21,18 @@ public class VC extends JFrame implements Observer {
     Observer vuePieceSuivante;
     Observer vuePartieTerminee;
     JPanel jp;
-    JTextField jt = new JTextField("");
+    JLabel jt = new JLabel("");
     JPanel panelvueGrilleJoueur1;
     JPanel panelVueGrilleJoueur2;
     JPanel panelVuePieceSuivante;
     JPanel panelvuePartieTerminee;
+
+    JPanel panelCarreAffichagePoints;
     private Executor ex = Executors.newSingleThreadExecutor();
 
     public VC(GrilleSimple _modeleJoueur1, GrilleSimple _modeleJoueur2) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setBackground(Color.BLACK);
         modeleJoueur1 = _modeleJoueur1;
         modeleJoueur2 = _modeleJoueur2;
         partie = new Partie(modeleJoueur1, modeleJoueur2);
@@ -45,20 +48,36 @@ public class VC extends JFrame implements Observer {
         jp.setOpaque(false);
 
 
-        Dimension Dime2 = new Dimension(165, 50);
-        jt.setPreferredSize(Dime2);
+        Dimension Dime2 = new Dimension(140, 50);
+        panelCarreAffichagePoints = new JPanel();
+        panelCarreAffichagePoints.setPreferredSize(Dime2);
+        panelCarreAffichagePoints.setLayout(new BorderLayout());
+        panelCarreAffichagePoints.add(jt, BorderLayout.CENTER);
+        panelCarreAffichagePoints.setBackground(Color.BLACK);
+        jt.setForeground(Color.CYAN);
         jp.setLayout(new FlowLayout(FlowLayout.LEFT));
-        jp.add(jt);
+        jp.add(panelCarreAffichagePoints);
+
+        Font maPolice = new Font("Arial", Font.BOLD, 16);
+
+        // Définition de la police pour le JLabel
+        jt.setFont(maPolice);
+
+
+
+
 
         panelvueGrilleJoueur1 = (JPanel) vueGrilleJoueur1;
         Dimension newDimension = new Dimension(200, 410);
         panelvueGrilleJoueur1.setPreferredSize(newDimension);
+        panelvueGrilleJoueur1.setOpaque(false);
         jp.setLayout(new FlowLayout(FlowLayout.CENTER));
         jp.add(panelvueGrilleJoueur1);
 
         panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
         Dimension newDimension1 = new Dimension(200, 410);
         panelVueGrilleJoueur2.setPreferredSize(newDimension1);
+        panelVueGrilleJoueur2.setOpaque(false);
         jp.setLayout(new FlowLayout(FlowLayout.CENTER));
         jp.add(panelVueGrilleJoueur2);
 
@@ -80,7 +99,7 @@ public class VC extends JFrame implements Observer {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_SPACE:
+                    case KeyEvent.VK_UP:
                         partie.getGrilleJoueur2().getPieceCourante().rotation();
                         break;
                     case KeyEvent.VK_LEFT:
@@ -148,14 +167,14 @@ public class VC extends JFrame implements Observer {
                     vueGrilleJoueur2.update(o, arg);
                     vuePieceSuivante.update(o, arg);
 
-                    jt.setText("J1: " + modeleJoueur1.points + ';' +
-                            "j2: " + modeleJoueur2.points);
+                    jt.setText("<html>J1 : " + modeleJoueur1.getPoints() + "<br>J2 : " + modeleJoueur2.getPoints() + "</html>");
+
 
                     lastTime = System.currentTimeMillis();
                 }
 
                 else{
-                    jt.setVisible(false);
+                    panelCarreAffichagePoints.setVisible(false);
                     panelvueGrilleJoueur1.setVisible(false);
                     panelVueGrilleJoueur2.setVisible(false);
                     panelVuePieceSuivante.setVisible(false);
@@ -183,7 +202,7 @@ public class VC extends JFrame implements Observer {
 
 
                 // Créez une instance d'ImagePanel avec l'image souhaitée
-                String imagePath = "data/Tetris.webp"; // Remplacez par le chemin de votre image
+                String imagePath = "data/Tetriss.jpeg"; // Remplacez par le chemin de votre image
                 ImagePanel imagePanel = new ImagePanel(imagePath);
 
                 // Ajoutez le panneau jp à l'ImagePanel

@@ -28,15 +28,17 @@ public class Partie {
     }
 
     public int partieTerminee(){
-        if(grilleJoueur1.grillePleine()){
-            return 1;
+        if(grilleJoueur1.grillePleine() || grilleJoueur2.grillePleine()){
+            if(grilleJoueur1.getPoints() > grilleJoueur2.getPoints()){
+                return 1;
+            }else if(grilleJoueur1.getPoints() < grilleJoueur2.getPoints()) {
+                return 2;
+            } else {
+                return 3;
+            }
         }
-        if(grilleJoueur2.grillePleine()){
-            return 2;
-        }
-        else{
-            return 0;
-        }
+
+        return 0;
     }
 
 
