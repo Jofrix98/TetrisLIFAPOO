@@ -27,12 +27,16 @@ public class Partie {
         return grilleJoueur2;
     }
 
-    public boolean partieTerminee(){
-        if(grilleJoueur1.grillePleine() || grilleJoueur2.grillePleine()){
-            System.out.println("Un des deux joueurs a perdu");
-            return true;
+    public int partieTerminee(){
+        if(grilleJoueur1.grillePleine()){
+            return 1;
         }
-        return false;
+        if(grilleJoueur2.grillePleine()){
+            return 2;
+        }
+        else{
+            return 0;
+        }
     }
 
 

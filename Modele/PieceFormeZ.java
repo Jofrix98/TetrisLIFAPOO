@@ -30,12 +30,12 @@ public class PieceFormeZ extends Piece{
                 if(tabBool[i][j]){
                     tabBoolint[i][j] = 1;
                 }
-                System.out.print(tabBoolint[i][j] + " ");
+
             }
-            System.out.println();
+
         }
 
-        System.out.println();
+
 
 
         for (int i = 0; i < 3; i++) {

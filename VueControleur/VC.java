@@ -33,61 +33,63 @@ public class VC extends JFrame implements Observer {
         modeleJoueur1 = _modeleJoueur1;
         modeleJoueur2 = _modeleJoueur2;
         partie = new Partie(modeleJoueur1, modeleJoueur2);
-        setSize(700, 450);
+        setSize(900, 450);
 
         vueGrilleJoueur1 = new VueGrilleV1(modeleJoueur1);
         vueGrilleJoueur2 = new VueGrilleV1(modeleJoueur2);
         vuePieceSuivante = new VuePieceSuivante(partie.getGrilleJoueur1());
-        vuePartieTerminee = new VuePartieTerminee(_modeleJoueur1, _modeleJoueur2);
+        vuePartieTerminee = new VuePartieTerminee(partie);
 
         jp = new JPanel();
         jp.setLayout(new OverlayLayout(jp));
 
 
-            Dimension Dime2 = new Dimension(165, 50);
-            jt.setPreferredSize(Dime2);
-            jp.setLayout(new FlowLayout(FlowLayout.LEFT));
-            jp.add(jt);
+        Dimension Dime2 = new Dimension(165, 50);
+        jt.setPreferredSize(Dime2);
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jp.add(jt);
 
+        panelvueGrilleJoueur1 = (JPanel) vueGrilleJoueur1;
+        Dimension newDimension = new Dimension(200, 410);
+        panelvueGrilleJoueur1.setPreferredSize(newDimension);
+        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.add(panelvueGrilleJoueur1);
 
-            panelvueGrilleJoueur1 = (JPanel) vueGrilleJoueur1;
-            Dimension newDimension = new Dimension(200, 410);
-            panelvueGrilleJoueur1.setPreferredSize(newDimension);
-            jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-            jp.add(panelvueGrilleJoueur1);
+        panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
+        Dimension newDimension1 = new Dimension(200, 410);
+        panelVueGrilleJoueur2.setPreferredSize(newDimension1);
+        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.add(panelVueGrilleJoueur2);
 
-            setContentPane(jp);
+        panelVuePieceSuivante = (JPanel) vuePieceSuivante;
+        Dimension Dime = new Dimension(100, 100);
+        panelVuePieceSuivante.setPreferredSize(Dime);
+        jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        jp.add(panelVuePieceSuivante);
 
-            panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
-            Dimension newDimension1 = new Dimension(200, 410);
-            panelVueGrilleJoueur2.setPreferredSize(newDimension1);
-            jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-            jp.add(panelVueGrilleJoueur2);
-            setContentPane(jp);
-
-            panelVuePieceSuivante = (JPanel) vuePieceSuivante;
-            Dimension Dime = new Dimension(100, 100);
-            panelVuePieceSuivante.setPreferredSize(Dime);
-
-            jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            jp.add((JPanel) panelVuePieceSuivante);
-
+        panelvuePartieTerminee = (JPanel) vuePartieTerminee;
+        Dimension dimPartieTerminee = new Dimension(900, 450);
+        panelvuePartieTerminee.setPreferredSize(dimPartieTerminee);
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jp.add(panelvuePartieTerminee);
+        panelvuePartieTerminee.setVisible(false);
+        setContentPane(jp);
         // Ajouter un KeyListener pour le joueur 1
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_SPACE:
-                        partie.getGrilleJoueur1().getPieceCourante().rotation();
+                        partie.getGrilleJoueur2().getPieceCourante().rotation();
                         break;
                     case KeyEvent.VK_LEFT:
-                        partie.getGrilleJoueur1().getPieceCourante().mvtGauche();
+                        partie.getGrilleJoueur2().getPieceCourante().mvtGauche();
                         break;
                     case KeyEvent.VK_RIGHT:
-                        partie.getGrilleJoueur1().getPieceCourante().mvtDroit();
+                        partie.getGrilleJoueur2().getPieceCourante().mvtDroit();
                         break;
                     case KeyEvent.VK_DOWN:
-                        partie.getGrilleJoueur1().getOrdonnanceurSimple().setTempsExecution(100);
+                        partie.getGrilleJoueur2().getOrdonnanceurSimple().setTempsExecution(100);
                         break;
                 }
             }
@@ -95,7 +97,7 @@ public class VC extends JFrame implements Observer {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    partie.getGrilleJoueur1().getOrdonnanceurSimple().setTempsExecution(500);
+                    partie.getGrilleJoueur2().getOrdonnanceurSimple().setTempsExecution(500);
                 }
             }
         });
@@ -106,17 +108,17 @@ public class VC extends JFrame implements Observer {
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_E:
-                        partie.getGrilleJoueur2().getPieceCourante().rotation();
+                        partie.getGrilleJoueur1().getPieceCourante().rotation();
                         break;
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_Q:
-                        partie.getGrilleJoueur2().getPieceCourante().mvtGauche();
+                        partie.getGrilleJoueur1().getPieceCourante().mvtGauche();
                         break;
                     case KeyEvent.VK_D:
-                        partie.getGrilleJoueur2().getPieceCourante().mvtDroit();
+                        partie.getGrilleJoueur1().getPieceCourante().mvtDroit();
                         break;
                     case KeyEvent.VK_S:
-                        partie.getGrilleJoueur2().getOrdonnanceurSimple().setTempsExecution(100);
+                        partie.getGrilleJoueur1().getOrdonnanceurSimple().setTempsExecution(100);
                         break;
                 }
             }
@@ -124,7 +126,7 @@ public class VC extends JFrame implements Observer {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_S) {
-                    partie.getGrilleJoueur2().getOrdonnanceurSimple().setTempsExecution(500);
+                    partie.getGrilleJoueur1().getOrdonnanceurSimple().setTempsExecution(500);
                 }
             }
         });
@@ -140,7 +142,7 @@ public class VC extends JFrame implements Observer {
     public void update(Observable o, Object arg) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                if(!partie.partieTerminee()){
+                if(partie.partieTerminee() == 0){
                     vueGrilleJoueur1.update(o, arg);
                     vueGrilleJoueur2.update(o, arg);
                     vuePieceSuivante.update(o, arg);
@@ -152,18 +154,17 @@ public class VC extends JFrame implements Observer {
                 }
 
                 else{
-                    System.out.println("INN");
                     jt.setVisible(false);
                     panelvueGrilleJoueur1.setVisible(false);
                     panelVueGrilleJoueur2.setVisible(false);
                     panelVuePieceSuivante.setVisible(false);
-                    jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-                    boolean count = true;
-
+                    panelvuePartieTerminee.setVisible(true);
+                    vuePartieTerminee.update(o, arg);
+                    /*
                     String imagePath = "data/Tetriss.jpeg";
                     ImagePanel imagePanel = new ImagePanel(imagePath);
                     add(imagePanel);
-
+                    */
                     setContentPane(jp);
                 }
             }
