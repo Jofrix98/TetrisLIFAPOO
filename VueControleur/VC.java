@@ -42,6 +42,7 @@ public class VC extends JFrame implements Observer {
 
         jp = new JPanel();
         jp.setLayout(new OverlayLayout(jp));
+        jp.setOpaque(false);
 
 
         Dimension Dime2 = new Dimension(165, 50);
@@ -172,13 +173,25 @@ public class VC extends JFrame implements Observer {
     }
 
     public static void main(String[] args) {
-        final ImageIcon icon = new ImageIcon("data/Tetriss.jpeg");
+
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GrilleSimple mJ1 = new GrilleSimple();
                 GrilleSimple mJ2 = new GrilleSimple();
                 VC vc = new VC(mJ1, mJ2);
+
+
+                // Créez une instance d'ImagePanel avec l'image souhaitée
+                String imagePath = "data/Tetris.webp"; // Remplacez par le chemin de votre image
+                ImagePanel imagePanel = new ImagePanel(imagePath);
+
+                // Ajoutez le panneau jp à l'ImagePanel
+                imagePanel.add(vc.jp);
+
+                // Définissez l'ImagePanel comme le contenu principal du JFrame
+                vc.setContentPane(imagePanel);
+
                 Partie partie = new Partie(mJ1, mJ2);
                 vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 partie.getGrilleJoueur1().addObserver(vc);
