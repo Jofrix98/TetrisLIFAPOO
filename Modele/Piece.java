@@ -71,7 +71,6 @@ public abstract class Piece implements Runnable{
         return tabBool[i][j];
     }
 
-    public abstract void rotation();
 
 
     public int getDY(){
@@ -119,6 +118,7 @@ public abstract class Piece implements Runnable{
         if(position_valide){
 
             x-=1;
+
 
         }
     }
@@ -177,6 +177,62 @@ public abstract class Piece implements Runnable{
 
     }
 
+    public void rotation(){
+        int[][] tabBoolint = new int[getLignes()][getColonnes()];
+        int[][] res = new int[getLignes()][getColonnes()];
+        boolean[][] newtabBool = new boolean[getLignes()][getColonnes()];
+
+        boolean positionValide = true;
+
+        for(int i=0;i<getLignes();i++){
+            for(int j=0;j<getColonnes();j++){
+                if(tabBool[i][j]){
+                    tabBoolint[i][j] = 1;
+                }
+
+            }
+
+        }
+
+        for (int i = 0; i < getLignes(); i++) {
+            for (int j = 0; j < getColonnes(); j++) {
+                res[getColonnes() - 1- j][i] = tabBoolint[i][j];
+            }
+        }
+
+        for(int i=0;i<getLignes();i++){
+            for(int j=0;j<getColonnes();j++){
+                newtabBool[i][j] = false;
+            }
+        }
+
+        for(int i=0;i<getLignes();i++){
+            for(int j=0;j<getColonnes();j++){
+                if(res[i][j] == 1){
+                    newtabBool[i][j] = true;
+                }
+            }
+        }
+
+        for(int i=0;i< getLignes();i++){
+            for(int j=0;j< getColonnes();j++){
+                if (newtabBool[i][j] && (((i+x) >= grille.LARGEUR) ||
+                        ((i+x) < 0)  ||
+                        ((j+y) >= grille.LONGUEUR) ||
+                        ((j+y) <= 0) ||
+                        (grille.matGrille[i+x][j+y] != java.awt.Color.BLACK))) {
+                    positionValide = false;
+                }
+            }
+        }
+
+        if(positionValide){
+            tabBool = newtabBool;
+        }
+
+        y -= 1;
+
+    }
 }
 
 
