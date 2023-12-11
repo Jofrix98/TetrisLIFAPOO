@@ -13,7 +13,7 @@ public class PieceFormeJ extends Piece{
                 tabBool[i][j] = false;
             }
         }
-        x = 3;
+        x = (int) (Math.random() * ((double)(_grille.LARGEUR - 3)));
         y = 0;
 
         direction = new Direction();

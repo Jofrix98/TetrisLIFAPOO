@@ -13,7 +13,8 @@ public class PieceFormeC extends Piece{
                 tabBool[i][j] = false;
             }
         }
-        x = 3;
+
+        x = (int) (Math.random() * ((double)(_grille.LARGEUR - 4)));
         y = 0;
 
         tabBool[1][0] = true;
