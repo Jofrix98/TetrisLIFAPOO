@@ -8,7 +8,7 @@ public abstract class Piece implements Runnable{
     protected int id;
     protected int x;
     protected int y;
-
+    protected Direction direction;
     private boolean mvtDroitt;
     private OrdonnanceurSimple ordoPiece;
     protected int dY = 1;
