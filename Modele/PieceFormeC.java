@@ -15,6 +15,7 @@ public class PieceFormeC extends Piece{
         }
         x = 3;
         y = 0;
+
         tabBool[1][0] = true;
         tabBool[2][0] = true;
         tabBool[1][1] = true;

@@ -50,7 +50,7 @@ public class VuePieceSuivante extends JPanel implements Observer {
         for (int i = 0; i < modele.getPieceSuivante().getLignes();i++){
             for(int j = 0; j < modele.getPieceSuivante().getColonnes();j++){
                 if(modele.getPieceSuivante().getTabBooli(i,j)){
-                    tab[i][j+1].setBackground(modele.getPieceSuivante().couleurPiece);
+                    tab[i][j].setBackground(modele.getPieceSuivante().couleurPiece);
                 }
 
             }

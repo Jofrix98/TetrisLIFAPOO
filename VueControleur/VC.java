@@ -180,11 +180,7 @@ public class VC extends JFrame implements Observer {
                     panelVuePieceSuivante.setVisible(false);
                     panelvuePartieTerminee.setVisible(true);
                     vuePartieTerminee.update(o, arg);
-                    /*
-                    String imagePath = "data/Tetriss.jpeg";
-                    ImagePanel imagePanel = new ImagePanel(imagePath);
-                    add(imagePanel);
-                    */
+
                     setContentPane(jp);
                 }
             }
