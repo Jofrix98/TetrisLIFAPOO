@@ -36,7 +36,7 @@ public class VC extends JFrame implements Observer {
         modeleJoueur1 = _modeleJoueur1;
         modeleJoueur2 = _modeleJoueur2;
         partie = new Partie(modeleJoueur1, modeleJoueur2);
-        setSize(900, 450);
+        setSize(700, 450);
 
         vueGrilleJoueur1 = new VueGrilleV1(modeleJoueur1);
         vueGrilleJoueur2 = new VueGrilleV1(modeleJoueur2);
@@ -88,9 +88,9 @@ public class VC extends JFrame implements Observer {
         jp.add(panelVuePieceSuivante);
 
         panelvuePartieTerminee = (JPanel) vuePartieTerminee;
-        Dimension dimPartieTerminee = new Dimension(900, 450);
-        panelvuePartieTerminee.setPreferredSize(dimPartieTerminee);
-        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+        /*Dimension dimPartieTerminee = new Dimension(800, 450);
+        panelvuePartieTerminee.setPreferredSize(dimPartieTerminee);*/
+        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
         jp.add(panelvuePartieTerminee);
         panelvuePartieTerminee.setVisible(false);
         setContentPane(jp);
