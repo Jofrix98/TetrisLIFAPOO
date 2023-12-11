@@ -55,3 +55,4 @@ public class VuePartieTerminee extends JPanel implements Observer {
     }
 }
 
+

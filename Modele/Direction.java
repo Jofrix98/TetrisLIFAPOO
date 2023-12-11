@@ -1,3 +1,4 @@
+
 package Modele;
 public class Direction {
     public enum DirectionPossible { up, down, right, left };
@@ -14,3 +15,5 @@ public class Direction {
         return directionCourante;
     }
 }
+
+
