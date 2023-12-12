@@ -33,11 +33,9 @@ public class VC extends JFrame implements Observer {
     JPanel panelTitlePiecesSuivantesJ1;
     JPanel panelTitlePiecesSuivantesJ2;
 
-    // Panel qui contient les visus suivantes du joueur 1 ici Grillepiecesuivante + label
-    JPanel panelCVS1;
+    // Panel qui contient les visus suivantes du joueur 1 et 2 ici Grillepiecesuivante + label
+    JPanel panelCVS12;
 
-    // la meme pour le joueur 2
-    JPanel panelCVS2;
 
     public VC(GrilleSimple _modeleJoueur1, GrilleSimple _modeleJoueur2) {
 
@@ -46,7 +44,7 @@ public class VC extends JFrame implements Observer {
         modeleJoueur1 = _modeleJoueur1;
         modeleJoueur2 = _modeleJoueur2;
         partie = new Partie(modeleJoueur1, modeleJoueur2);
-        setSize(800, 450);
+        setSize(900, 450);
 
         vueGrilleJoueur1 = new VueGrilleV1(modeleJoueur1);
         vueGrilleJoueur2 = new VueGrilleV1(modeleJoueur2);
@@ -109,29 +107,30 @@ public class VC extends JFrame implements Observer {
         panelVuePieceSuivanteJoueur1 = (JPanel) vuePieceSuivanteJoueur1;
         Dimension Dime = new Dimension(100, 100);
         panelVuePieceSuivanteJoueur1.setPreferredSize(Dime);
+        panelVuePieceSuivanteJoueur1.setBackground(Color.black);
 
         panelVuePieceSuivanteJoueur2 = (JPanel) vuePieceSuivanteJoueur2;
         Dimension DimeJ2 = new Dimension(100, 100);
         panelVuePieceSuivanteJoueur2.setPreferredSize(DimeJ2);
+        panelVuePieceSuivanteJoueur2.setBackground(Color.black);
 
         panelvuePartieTerminee = (JPanel) vuePartieTerminee;
         jp.add(panelvuePartieTerminee);
         panelvuePartieTerminee.setVisible(false);
 
-        panelCVS1 = new JPanel(new BorderLayout());
-        Dimension DimePCVS = new Dimension(100, 150);
-        panelCVS1.setPreferredSize(DimePCVS);
-        panelCVS1.add(panelTitlePiecesSuivantesJ1);
-        panelCVS1.add(panelVuePieceSuivanteJoueur1, BorderLayout.SOUTH);
-        jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        jp.add(panelCVS1);
+        panelCVS12 = new JPanel();
+        panelCVS12.setLayout(new BoxLayout(panelCVS12, BoxLayout.Y_AXIS));
+        Dimension DimePCVS = new Dimension(300, 300);
+        panelCVS12.setPreferredSize(DimePCVS);
+        panelCVS12.add(panelTitlePiecesSuivantesJ1);
+        panelCVS12.add(panelVuePieceSuivanteJoueur1);
 
-        panelCVS2 = new JPanel(new BorderLayout());
-        panelCVS2.setPreferredSize(DimePCVS);
-        panelCVS2.add(panelTitlePiecesSuivantesJ2);
-        panelCVS2.add(panelVuePieceSuivanteJoueur2, BorderLayout.SOUTH);
+        panelCVS12.add(panelTitlePiecesSuivantesJ2);
+        panelCVS12.add(panelVuePieceSuivanteJoueur2);
+
         jp.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        jp.add(panelCVS2);
+        panelCVS12.setOpaque(false);
+        jp.add(panelCVS12);
 
         // Ajouter un KeyListener pour le joueur 1
         addKeyListener(new KeyAdapter() {
@@ -210,8 +209,8 @@ public class VC extends JFrame implements Observer {
                     labelJ2.setText("    Joueur 2");
                     lastTime = System.currentTimeMillis();
                 } else {
-                    panelCVS1.setVisible(false);
-                    panelCVS2.setVisible(false);
+                    panelCVS12.setVisible(false);
+
                     panelCarreAffichagePoints.setVisible(false);
                     panelvueGrilleJoueur1.setVisible(false);
                     panelVueGrilleJoueur2.setVisible(false);
