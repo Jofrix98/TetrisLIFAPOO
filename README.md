@@ -1,7 +1,7 @@
 # Projet Tetris 2 Joueur - Programmation Orientée Objet (LIFAPOO)
 
 ## Description
-Ce projet Tetris a été développé par Emmanuel Gokana et Jofre Coll dans le cadre de la matière Programmation Orientée Objet. Le jeu Tetris est une implémentation classique à 2 joueurs du célèbre jeu Tetris.
+Ce projet Tetris a été développé par [Emmanuel Gokana](https://github.com/emmanuelgkn) et [Jofre Coll](https://github.com/Jofrix98) et Jofre Coll dans le cadre de la matière Programmation Orientée Objet. Le jeu Tetris est une implémentation classique à 2 joueurs du célèbre jeu Tetris.
 
 ## Compilation
 Le projet peut être compilé à l'aide d'un environnement de développement prenant en charge la programmation en langage Java, idéalement IntellIJ. Assurez-vous d'avoir les dépendances nécessaires installées.
@@ -29,5 +29,5 @@ Utilisez ces commandes pour contrôler les pièces pendant le jeu.
 Une fois le projet compilé avec succès, cliquez sur la fenêtre de l'application résultante pour commencer à jouer au Tetris.
 
 ## Auteurs
-- Emmanuel Gokana
-- Jofre Coll
+- [Emmanuel Gokana](https://github.com/emmanuelgkn)
+- [Jofre Coll](https://github.com/Jofrix98)
