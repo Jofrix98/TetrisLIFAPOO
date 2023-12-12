@@ -94,14 +94,14 @@ public class VC extends JFrame implements Observer {
         Dimension newDimension = new Dimension(200, 410);
         panelvueGrilleJoueur1.setPreferredSize(newDimension);
         panelvueGrilleJoueur1.setOpaque(false);
-        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
         jp.add(panelvueGrilleJoueur1);
 
         panelVueGrilleJoueur2 = (JPanel) vueGrilleJoueur2;
         Dimension newDimension1 = new Dimension(200, 410);
         panelVueGrilleJoueur2.setPreferredSize(newDimension1);
         panelVueGrilleJoueur2.setOpaque(false);
-        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
         jp.add(panelVueGrilleJoueur2);
 
         panelVuePieceSuivanteJoueur1 = (JPanel) vuePieceSuivanteJoueur1;

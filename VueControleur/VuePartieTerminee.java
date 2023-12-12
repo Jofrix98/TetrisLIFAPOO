@@ -14,7 +14,7 @@ public class VuePartieTerminee extends JPanel implements Observer {
     public VuePartieTerminee(Partie _partie) {
         partie = _partie;
         setLayout(new BorderLayout());
-        setBackground(Color.black);
+        setOpaque(false);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class VuePartieTerminee extends JPanel implements Observer {
         labelPartieTerminee.setForeground(Color.WHITE); // Couleur du texte
         labelPartieTerminee.setHorizontalAlignment(JLabel.CENTER); // Alignement au centre
         labelPartieTerminee.setVerticalAlignment(JLabel.CENTER);
-        labelPartieTerminee.setPreferredSize(new Dimension(400, 400));
+       labelPartieTerminee.setPreferredSize(new Dimension(900, 400));
         add(labelPartieTerminee, BorderLayout.CENTER);
         labelPartieTerminee.setVisible(true);
     }
